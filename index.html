@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>طلب الحصول على 100 دينار أردني</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #ffffff;
+      color: #333;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      background: #27ae60;
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    .amount {
+      font-size: 34px;
+      font-weight: bold;
+      color: #27ae60;
+      margin: 10px 0;
+    }
+
+    .note {
+      background: #f1f8ff;
+      color: #0a3d62;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .logos {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .logos span {
+      display: inline-block;
+      margin: 5px 8px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .footer strong {
+      color: #c0392b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div class="badge">تقديم طلب</div>
+      <h1>طلب الحصول على رصيد مالي</h1>
+      <div class="amount">100 دينار أردني</div>
+    </div>
+
+    <div class="note">
+      هذا النموذج مخصص <strong>لتقديم طلب استحقاق</strong> فقط  
+      ولا يُعد وسيلة دفع أو خصم أي مبلغ
+    </div>
+
+    <form onsubmit="event.preventDefault(); alert('تم إرسال الطلب بنجاح (نموذج تجريبي)');">
+      <div class="form-group">
+        <label>رقم البطاقة (لأغراض التحقق الشكلي فقط)</label>
+        <input type="text" placeholder="**** **** **** 1234" maxlength="19">
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label>تاريخ الانتهاء</label>
+          <input type="text" placeholder="MM / YY" maxlength="5">
+        </div>
+
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="password" placeholder="***" maxlength="3">
+        </div>
+      </div>
+
+      <button class="btn">إرسال طلب الحصول على 100 دينار</button>
+    </form>
+
+    <div class="logos">
+      <span>VISA</span>
+      <span>MasterCard</span>
+      <span>بنوك أردنية</span>
+      <span>محافظ إلكترونية</span>
+    </div>
+
+    <div class="footer">
+      <strong>تنويه هام:</strong><br>
+      هذا الموقع تجريبي للعرض فقط.  
+      لا يتم جمع، تخزين أو إرسال أي بيانات مالية أو شخصية.  
+      إدخال البيانات هنا اختياري وغير حقيقي.
+    </div>
+  </div>
+
+</body>
+</html>
