@@ -1,190 +1,288 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>طلب الحصول على 100 دينار أردني</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>طلب استحقاق 100 دينار أردني</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-    }
+<style>
+:root{
+  --green:#00c853;
+  --blue:#1e88e5;
+  --dark:#0a1622;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.18);
+}
 
-    .container {
-      max-width: 420px;
-      margin: 40px auto;
-      background: #ffffff;
-      color: #333;
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
+*{box-sizing:border-box}
 
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+body{
+  margin:0;
+  font-family: "Segoe UI", Tahoma, Arial;
+  background:
+    radial-gradient(circle at top,#23395d,#0a1622 65%);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
 
-    .badge {
-      background: #27ae60;
-      display: inline-block;
-      padding: 8px 18px;
-      border-radius: 25px;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 10px;
-    }
+/* Main Card */
+.app{
+  width:100%;
+  max-width:440px;
+  padding:28px;
+  border-radius:30px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,.03)
+  );
+  backdrop-filter: blur(22px);
+  border:1px solid var(--border);
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+  animation:fadeIn .9s ease;
+}
 
-    h1 {
-      font-size: 22px;
-      margin: 10px 0;
-    }
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
 
-    .amount {
-      font-size: 34px;
-      font-weight: bold;
-      color: #27ae60;
-      margin: 10px 0;
-    }
+/* Header */
+.header{
+  text-align:center;
+  margin-bottom:26px;
+}
 
-    .note {
-      background: #f1f8ff;
-      color: #0a3d62;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 14px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.badge{
+  display:inline-block;
+  padding:8px 22px;
+  border-radius:30px;
+  background:linear-gradient(135deg,var(--green),#00e676);
+  color:#003b1f;
+  font-weight:800;
+  font-size:14px;
+}
 
-    .form-group {
-      margin-bottom: 15px;
-    }
+.header h1{
+  font-size:23px;
+  margin:14px 0 6px;
+}
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 14px;
-    }
+.amount{
+  font-size:40px;
+  font-weight:900;
+  color:#00e676;
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-      outline: none;
-    }
+/* Info Box */
+.info{
+  background:rgba(0,0,0,.35);
+  padding:16px;
+  border-radius:18px;
+  font-size:14px;
+  line-height:1.7;
+  text-align:center;
+  margin-bottom:26px;
+}
 
-    input::placeholder {
-      color: #aaa;
-    }
+/* Card Visual */
+.card{
+  background:linear-gradient(135deg,#0d47a1,#1565c0);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:26px;
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+  position:relative;
+  overflow:hidden;
+}
 
-    .row {
-      display: flex;
-      gap: 10px;
-    }
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,.25),
+    transparent 70%
+  );
+  animation:shine 3s infinite;
+}
 
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #27ae60, #2ecc71);
-      border: none;
-      border-radius: 12px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+@keyframes shine{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
+}
 
-    .btn:hover {
-      opacity: 0.9;
-    }
+.card .num{
+  letter-spacing:3px;
+  font-size:19px;
+  margin:18px 0;
+}
 
-    .logos {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
-      color: #555;
-    }
+.card .row{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  opacity:.9;
+}
 
-    .logos span {
-      display: inline-block;
-      margin: 5px 8px;
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: #f2f2f2;
-      font-weight: bold;
-    }
+/* Fields */
+.field{
+  position:relative;
+  margin-bottom:18px;
+}
 
-    .footer {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #666;
-      text-align: center;
-      line-height: 1.6;
-    }
+.field input{
+  width:100%;
+  padding:18px 14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--glass);
+  color:#fff;
+  font-size:15px;
+  outline:none;
+  transition:.3s;
+}
 
-    .footer strong {
-      color: #c0392b;
-    }
-  </style>
+.field input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 2px rgba(30,136,229,.25);
+}
+
+.field label{
+  position:absolute;
+  top:50%;
+  right:14px;
+  transform:translateY(-50%);
+  font-size:13px;
+  color:#cfd8dc;
+  pointer-events:none;
+  transition:.3s;
+}
+
+.field input:not(:placeholder-shown)+label,
+.field input:focus+label{
+  top:-8px;
+  font-size:12px;
+  padding:0 8px;
+  background:#0a1622;
+  color:var(--blue);
+}
+
+.row{
+  display:flex;
+  gap:14px;
+}
+
+/* Button */
+button{
+  width:100%;
+  padding:18px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--green),#00e676);
+  font-size:17px;
+  font-weight:900;
+  color:#003b1f;
+  cursor:pointer;
+  margin-top:12px;
+  transition:.3s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 30px rgba(0,200,83,.45);
+}
+
+/* Logos */
+.logos{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin:22px 0 12px;
+}
+
+.logo{
+  padding:8px 16px;
+  border-radius:14px;
+  background:rgba(255,255,255,.15);
+  font-weight:800;
+  font-size:13px;
+}
+
+/* Footer */
+.footer{
+  font-size:12px;
+  line-height:1.7;
+  text-align:center;
+  opacity:.85;
+}
+
+.footer strong{color:#ff5252}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="header">
-      <div class="badge">تقديم طلب</div>
-      <h1>طلب الحصول على رصيد مالي</h1>
-      <div class="amount">100 دينار أردني</div>
-    </div>
+<div class="app">
 
-    <div class="note">
-      هذا النموذج مخصص <strong>لتقديم طلب استحقاق</strong> فقط  
-      ولا يُعد وسيلة دفع أو خصم أي مبلغ
-    </div>
+  <div class="header">
+    <div class="badge">طلب استحقاق رسمي</div>
+    <h1>طلب الحصول على رصيد مالي</h1>
+    <div class="amount">100 دينار أردني</div>
+  </div>
 
-    <form onsubmit="event.preventDefault(); alert('تم إرسال الطلب بنجاح (نموذج تجريبي)');">
-      <div class="form-group">
-        <label>رقم البطاقة (لأغراض التحقق الشكلي فقط)</label>
-        <input type="text" placeholder="**** **** **** 1234" maxlength="19">
-      </div>
+  <div class="info">
+    هذا النموذج مخصص <strong>لتقديم طلب استحقاق فقط</strong><br>
+    لا يُعد وسيلة دفع ولا يتم خصم أي مبلغ
+  </div>
 
-      <div class="row">
-        <div class="form-group">
-          <label>تاريخ الانتهاء</label>
-          <input type="text" placeholder="MM / YY" maxlength="5">
-        </div>
-
-        <div class="form-group">
-          <label>CVV</label>
-          <input type="password" placeholder="***" maxlength="3">
-        </div>
-      </div>
-
-      <button class="btn">إرسال طلب الحصول على 100 دينار</button>
-    </form>
-
-    <div class="logos">
-      <span>VISA</span>
-      <span>MasterCard</span>
-      <span>بنوك أردنية</span>
-      <span>محافظ إلكترونية</span>
-    </div>
-
-    <div class="footer">
-      <strong>تنويه هام:</strong><br>
-      هذا الموقع تجريبي للعرض فقط.  
-      لا يتم جمع، تخزين أو إرسال أي بيانات مالية أو شخصية.  
-      إدخال البيانات هنا اختياري وغير حقيقي.
+  <div class="card">
+    <div>بطاقة تعريف رقمية</div>
+    <div class="num">**** **** **** 1234</div>
+    <div class="row">
+      <div>MM / YY</div>
+      <div>CVV</div>
     </div>
   </div>
+
+  <form onsubmit="event.preventDefault();alert('تم إرسال الطلب بنجاح (نموذج رسمي تجريبي)');">
+    <div class="field">
+      <input type="text" placeholder=" " maxlength="19">
+      <label>رقم البطاقة (شكلي فقط)</label>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <input type="text" placeholder=" " maxlength="5">
+        <label>تاريخ الانتهاء</label>
+      </div>
+
+      <div class="field">
+        <input type="password" placeholder=" " maxlength="3">
+        <label>CVV</label>
+      </div>
+    </div>
+
+    <button>إرسال طلب الحصول على 100 دينار</button>
+  </form>
+
+  <div class="logos">
+    <div class="logo">VISA</div>
+    <div class="logo">MasterCard</div>
+    <div class="logo">Jordan Banks</div>
+  </div>
+
+  <div class="footer">
+    <strong>تنويه قانوني:</strong><br>
+    هذا الموقع تجريبي للعرض فقط ولا يتم جمع أو تخزين أي بيانات مالية أو شخصية.
+  </div>
+
+</div>
 
 </body>
 </html>
