@@ -6,174 +6,210 @@
 <title>الحصول على رصيد مالي — بقيمة 100 دينار</title>
 <meta name="description" content="نموذج عرض توضيحي لطلب استحقاق رصيد — يعمل محليًا، لا يتم إرسال أو نقل أي بيانات خارج المتصفح." />
 <link rel="icon" href="data:,">
-
 <style>
 :root{
-  --surface:#ffffff;
-  --accent:#06b6d4;
-  --accent-2:#3b82f6;
-  --muted:#94a3b8;
-  --text:#0f172a;
-  --shadow:0 18px 50px rgba(2,8,23,.18);
-  --radius:12px;
+  --bg: #f3f7fb;
+  --card-bg: linear-gradient(135deg,#1e3a8a,#2563eb);
+  --surface: #ffffff;
+  --muted: #64748b;
+  --accent: #06b6d4;
+  --accent-2: #3b82f6;
+  --shadow-lg: 0 18px 50px rgba(15,23,42,.12);
+  --shadow-sm: 0 8px 22px rgba(2,8,23,.06);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --glass: rgba(255,255,255,.06);
   font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans Arabic", sans-serif;
+  color-scheme: light;
 }
 
-/* reset */
+/* Reset + base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  background:linear-gradient(180deg,#eef2ff 0%, #f8fafc 100%);
-  color:var(--text);
+  background:var(--bg);
+  color:#0f172a;
   direction:rtl;
-  padding:12px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   display:flex;
+  align-items:flex-start;
   justify-content:center;
+  padding:18px;
   min-height:100vh;
 }
 
-/* app container */
+/* App shell to look like an application */
 .app{
   width:100%;
   max-width:980px;
-  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-/* hero */
-.hero{
-  background:linear-gradient(135deg,#0b1c2d,#0f172a);
-  color:white;
-  border-radius:14px;
-  padding:10px 12px;
-  box-shadow:var(--shadow);
+/* Top bar (app-like) */
+.topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  padding:12px 14px;
+  background:linear-gradient(90deg,#0b1c2d,#0f172a);
+  color:white;
+  border-radius:14px;
+  box-shadow:var(--shadow-lg);
 }
-.brand-badge{ width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#ffd166,#ffb703);display:flex;align-items:center;justify-content:center;font-weight:900;color:#05203a;font-size:18px }
-.hero h1{font-size:15px;margin:0;font-weight:800}
+.app-title{display:flex;gap:12px;align-items:center}
+.brand-badge{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#ffd166,#ffb703);display:flex;align-items:center;justify-content:center;font-weight:900;color:#05203a;font-size:18px}
+.title-text h1{font-size:16px;margin:0;font-weight:800}
+.title-text p{margin:0;font-size:13px;color:rgba(255,255,255,.9)}
 
-/* trust */
-.trust-bar{ display:flex; gap:8px; margin:10px 0; align-items:center; }
-.trust{ flex:1; background:var(--surface); border-radius:10px; padding:8px; font-size:13px; color:var(--muted); border:1px solid #eef6ff; box-shadow:0 8px 20px rgba(2,8,23,.04); }
-
-/* MAIN: use flex for tight side-by-side */
-.main-grid{
+/* trust line */
+.trust-bar{
   display:flex;
-  gap:6px;              /* very small gap */
+  gap:8px;
+  align-items:center;
+  justify-content:space-between;
+}
+.trust{
+  flex:1;
+  background:var(--surface);
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:13px;
+  color:var(--muted);
+  box-shadow:var(--shadow-sm);
+  border:1px solid rgba(2,6,23,.03);
+  text-align:center;
+}
+
+/* main area: tight side-by-side (card + form) */
+.main{
+  display:flex;
+  gap:8px;               /* very small gap so they appear glued */
   align-items:flex-start;
-  margin-top:8px;
 }
 
-/* Card column: make it narrow and allow slight overlap if needed */
-.card-wrap{
-  flex: 0 0 40%;       /* 40% width for card preview */
-  margin:0;
-  position:relative;
+/* Card preview column */
+.card-col{
+  flex: 0 0 42%;         /* close to half but slightly narrower to mimic real app */
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-/* Optional stronger "glue" — uncomment to overlap slightly */
-// .card-wrap{ margin-inline-start:-16px; }
+/* Form column */
+.form-col{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
+/* Card component (app-like) */
 .card{
-  width:100%;
-  border-radius:var(--radius);
-  min-height:160px;
+  background:var(--card-bg);
+  border-radius:var(--radius-lg);
+  padding:14px;
+  color:white;
+  box-shadow:var(--shadow-lg);
   position:relative;
-  overflow:hidden;
-  transition:box-shadow .2s ease;
-  padding:0;
-}
-.card-face{
-  padding:12px;
-  color:#fff;
-  min-height:160px;
-  border-radius:var(--radius);
-  position:relative;
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
-  box-shadow:var(--shadow);
+  min-height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
-/* card content */
-.card-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:12px; padding:6px; }
-.brand{ display:flex; gap:8px; align-items:center; font-weight:800; text-transform:uppercase; }
-.logo{ width:44px;height:28px;border-radius:8px;background:linear-gradient(90deg,#fff8cc,#ffd166);display:flex;align-items:center;justify-content:center;color:#05203a;font-weight:800; font-size:12px; }
-.chip{ width:40px;height:24px;border-radius:6px;background:linear-gradient(135deg,#fde68a,#facc15); }
+/* card header row */
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800;text-transform:uppercase}
+.logo{width:46px;height:30px;border-radius:8px;background:linear-gradient(90deg,#fff8cc,#ffd166);display:flex;align-items:center;justify-content:center;color:#05203a;font-weight:800}
+.chip{width:42px;height:26px;border-radius:6px;background:linear-gradient(135deg,#fde68a,#facc15)}
 
+/* card main text */
 .card-number{
-  font-size:18px;
-  font-weight:800;
+  font-size:20px;
+  font-weight:900;
   letter-spacing:2px;
   direction:ltr;
   text-align:left;
-  margin:6px 12px;
+  margin:6px 2px;
 }
+.card-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;gap:8px}
+.small-muted{color:rgba(255,255,255,.95);font-weight:700}
 
-/* meta row */
-.card-meta{ display:flex; justify-content:space-between; align-items:center; gap:8px; padding:0 12px 12px 12px; font-size:11px; }
-.small-muted{ color:rgba(255,255,255,.95); font-weight:700; }
-
-/* FRONT CVV (now visible on front near bottom-right) */
+/* CVV badge shown on front (small glass box) */
 .card-cvv-front{
   position:absolute;
-  bottom:18px;
-  left:18px; /* left because card content uses LTR oriented number area on left; in rtl layout card itself is visually right column */
-  background:rgba(255,255,255,.10);
+  bottom:14px;
+  left:14px; /* note: left positions the box on the number side visually */
+  background:rgba(255,255,255,.08);
   padding:6px 10px;
-  border-radius:8px;
+  border-radius:10px;
   font-weight:800;
   letter-spacing:2px;
-  color:#fff;
-  font-size:13px;
-  min-width:54px;
+  min-width:58px;
   text-align:center;
-  backdrop-filter: blur(2px);
+  color:#fff;
+  backdrop-filter: blur(4px);
 }
 
-/* form column: compact to sit next to card */
-.form-column{
-  flex:1;
-  margin:0;
-}
+/* App-like form card */
 .section{
   background:var(--surface);
-  border-radius:10px;
-  padding:10px;
-  box-shadow:0 10px 30px rgba(2,8,23,.06);
+  border-radius:var(--radius-md);
+  padding:14px;
+  box-shadow:var(--shadow-sm);
 }
 
-/* inputs */
-.label{ font-size:13px; color:var(--muted); margin-bottom:6px; display:block; font-weight:700 }
-.input{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e6eef8; font-size:14px; background:transparent; outline:none; transition:box-shadow .14s; }
-.input:focus{ box-shadow:0 8px 30px rgba(37,99,235,.08); border-color:var(--accent); transform:translateY(-1px); }
+/* Adjust spacing & typography for consistency */
+.label{font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:800;display:block}
+.input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #e6eef8;
+  font-size:15px;
+  background:transparent;
+  outline:none;
+  transition:box-shadow .12s, transform .12s, border-color .12s;
+  color:#0b1724;
+  caret-color:var(--accent-2);
+  direction:ltr;            /* ensure digits input starts from left */
+  text-align:left;          /* show numbers left-aligned */
+}
+.input:focus{ box-shadow:0 10px 30px rgba(37,99,235,.08); border-color:var(--accent-2); transform:translateY(-1px); }
 
-/* helper / hint / error */
-.hint{ font-size:13px; color:var(--muted) }
-.error{ font-size:13px; color:#ef4444; margin-top:8px; display:none }
-.error[aria-hidden="false"]{ display:block }
+/* small helper text and error messages */
+.hint{font-size:13px;color:var(--muted)}
+.error{font-size:13px;color:#ef4444;margin-top:8px;display:none}
+.error[aria-hidden="false"]{display:block}
 
-/* actions */
-.actions{ margin-top:12px; position:sticky; bottom:8px; }
-.btn{ width:100%; padding:12px; border-radius:10px; border:none; background:linear-gradient(90deg,var(--accent-2),var(--accent)); color:white; font-weight:900; font-size:15px; cursor:pointer; box-shadow:0 8px 26px rgba(37,99,235,.14)}
-.btn:disabled{ opacity:.6; cursor:not-allowed }
+/* controls */
+.form-row{display:flex;gap:10px;align-items:center;margin-top:10px}
+.btn{display:inline-block;width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 8px 30px rgba(37,99,235,.12)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
 
-/* small screens: stack */
+/* small screens: stack and make comfortable */
 @media (max-width:900px){
-  .main-grid{ flex-direction:column; gap:10px; }
-  .card-wrap{ flex: none; width:100%; }
-  .form-column{ width:100%; }
-  .card-cvv-front{ left:12px; bottom:12px; }
+  .main{flex-direction:column;gap:12px}
+  .card-col,.form-col{flex:unset;width:100%}
+  .card-cvv-front{left:12px;bottom:12px}
+  .card-number{font-size:18px}
 }
 </style>
 </head>
 <body>
 
 <main class="app" aria-labelledby="pageTitle">
-  <header class="hero" role="banner">
-    <div style="display:flex;gap:10px;align-items:center">
+  <header class="topbar" role="banner">
+    <div class="app-title">
       <div class="brand-badge" aria-hidden="true">💳</div>
-      <h1 id="pageTitle">الحصول على رصيد مالي — بقيمة 100 دينار</h1>
+      <div class="title-text">
+        <h1 id="pageTitle">الحصول على رصيد مالي — 100 د.</h1>
+        <p>واجهة تشبه التطبيق — محتوى محلي وآمن</p>
+      </div>
     </div>
     <div aria-hidden="true"></div>
   </header>
@@ -184,56 +220,52 @@ body{
     <div class="trust">⚖️ تجربة متوافقة</div>
   </div>
 
-  <div class="main-grid" aria-live="polite">
-    <!-- CARD (right column visually due to RTL) -->
-    <section class="card-wrap" aria-hidden="false">
-      <div id="card" class="card" aria-label="معاينة البطاقة">
-        <div class="card-face card-front" id="cardFront">
-          <div class="card-top">
-            <div style="display:flex;gap:8px;align-items:center">
-              <div class="chip" aria-hidden="true"></div>
-              <div class="brand" id="brandLabel" aria-hidden="false">
-                <div class="logo" id="brandLogo">—</div>
-                <div id="brandName" style="font-size:12px;opacity:.95">—</div>
-              </div>
-            </div>
-            <div style="font-size:11px;opacity:.9">صالحة حتى</div>
-          </div>
-
-          <div>
-            <div class="card-number" id="cardView" aria-live="polite" aria-atomic="true">0000 0000 0000 0000</div>
-            <div class="card-meta">
-              <div>
-                <div style="font-size:10px;opacity:.9">مالك البطاقة</div>
-                <div class="small-muted" id="ownerView">الاسم هنا</div>
-              </div>
-              <div style="text-align:left">
-                <div style="font-size:10px;opacity:.9">انتهاء</div>
-                <div class="small-muted" id="dateView">MM/YY</div>
-              </div>
+  <div class="main" aria-live="polite">
+    <!-- CARD PREVIEW -->
+    <section class="card-col" aria-hidden="false">
+      <div class="card" id="card" aria-label="معاينة البطاقة">
+        <div class="card-top">
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="chip" aria-hidden="true"></div>
+            <div class="brand" id="brandLabel" aria-hidden="false">
+              <div class="logo" id="brandLogo">—</div>
+              <div id="brandName" style="font-size:13px;opacity:.95">—</div>
             </div>
           </div>
-
-          <!-- CVV shown on front as requested -->
-          <div class="card-cvv-front" id="cardCvvFront">***</div>
+          <div style="font-size:12px;opacity:.95">صالحة حتى</div>
         </div>
+
+        <div>
+          <div class="card-number" id="cardView" aria-live="polite" aria-atomic="true">0000 0000 0000 0000</div>
+          <div class="card-meta" style="margin-top:8px">
+            <div>
+              <div style="font-size:11px;opacity:.95">مالك البطاقة</div>
+              <div class="small-muted" id="ownerView">الاسم هنا</div>
+            </div>
+            <div style="text-align:left">
+              <div style="font-size:11px;opacity:.95">انتهاء</div>
+              <div class="small-muted" id="dateView">MM/YY</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CVV shown on front as a small badge -->
+        <div class="card-cvv-front" id="cardCvvFront">***</div>
       </div>
 
-      <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
-        <button id="showNumberBtn" aria-pressed="true" class="icon-btn" title="إظهار/إخفاء رقم البطاقة">🙈</button>
-        <div style="flex:1" class="hint">الرقم وCVV يظهران مباشرة هنا. اضغط العين لإخفائهما.</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button id="showNumberBtn" class="btn" aria-pressed="true" title="إظهار/إخفاء الأرقام" style="width:auto;padding:8px 12px;font-size:14px">🙈 إظهار</button>
+        <div class="hint" style="flex:1">الرقم وCVV يظهران على المعاينة. اضغط على الزر لإخفائهما.</div>
       </div>
     </section>
 
-    <!-- FORM (left column) -->
-    <form id="eligibilityForm" class="form-column section" novalidate autocomplete="off">
+    <!-- FORM -->
+    <form id="eligibilityForm" class="form-col section" novalidate autocomplete="off">
       <div>
         <label for="cardNumber" class="label">رقم البطاقة</label>
-        <div style="display:flex;gap:8px;align-items:center">
-          <input id="cardNumber" class="input" type="text" inputmode="numeric"
-                 placeholder="0000 0000 0000 0000" maxlength="23" autocomplete="cc-number" name="cc-number" aria-label="رقم البطاقة" />
-          <button type="button" id="pasteBtn" class="small-btn" title="لصق">لصق</button>
-        </div>
+        <input id="cardNumber" class="input" type="text" inputmode="numeric"
+               placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number"
+               name="cc-number" aria-label="رقم البطاقة" />
         <div id="cardError" class="error" role="alert" aria-hidden="true"></div>
       </div>
 
@@ -242,7 +274,7 @@ body{
         <input id="owner" class="input" type="text" placeholder="الاسم كما على البطاقة" autocomplete="cc-name" name="cc-name" />
       </div>
 
-      <div style="display:flex;gap:8px;margin-top:10px;align-items:flex-start">
+      <div class="form-row" style="margin-top:10px">
         <div style="flex:1">
           <label for="exp" class="label">تاريخ الانتهاء (MM/YY)</label>
           <input id="exp" class="input" inputmode="numeric" maxlength="5" placeholder="MM/YY" autocomplete="cc-exp" name="cc-exp" />
@@ -251,17 +283,17 @@ body{
 
         <div style="width:40%">
           <label for="cvv" class="label">CVV</label>
-          <input id="cvv" class="input" inputmode="numeric" maxlength="4" placeholder="***" autocomplete="cc-csc" name="cc-csc" />
+          <input id="cvv" class="input" inputmode="numeric" maxlength="3" placeholder="***" autocomplete="cc-csc" name="cc-csc" />
           <div id="cvvError" class="error" role="alert" aria-hidden="true"></div>
         </div>
       </div>
 
-      <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
         <input type="checkbox" id="persistToggle" />
         <label for="persistToggle" class="hint" style="margin:0">حفظ النموذج محليًا في هذا المتصفح (اختياري)</label>
       </div>
 
-      <div class="actions">
+      <div style="margin-top:12px">
         <button id="submitBtn" class="btn" type="submit" disabled>إرسال طلب الاستحقاق</button>
       </div>
     </form>
@@ -272,8 +304,16 @@ body{
 <div id="toast" role="status" aria-live="polite" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:linear-gradient(90deg,#10b981,#06b6d4);color:white;padding:10px 14px;border-radius:10px;box-shadow:0 14px 40px rgba(2,8,23,.18);z-index:60;"></div>
 
 <script>
-/* helpers */
-const $ = s => document.querySelector(s);
+/*
+  - Removed paste button (as requested).
+  - Inputs accept digits left-to-right (input direction forced to LTR).
+  - Card number limited to 16 digits maximum and formatted as 4-4-4-4.
+  - CVV limited to 3 digits.
+  - UI tuned for consistent sizes & app-like appearance.
+*/
+
+/* Small helpers */
+const $ = sel => document.querySelector(sel);
 const onlyDigits = s => (s||'').replace(/\D/g,'');
 
 /* DOM */
@@ -291,14 +331,19 @@ const cardError = $('#cardError');
 const expError = $('#expError');
 const cvvError = $('#cvvError');
 const submitBtn = $('#submitBtn');
-const pasteBtn = $('#pasteBtn');
 const showNumberBtn = $('#showNumberBtn');
 const toast = $('#toast');
 const persistToggle = $('#persistToggle');
 
-let state = { digits:'', brand:null, valid:false, showNumber:true, persist:false };
+let state = {
+  digits: '',
+  brand: null,
+  valid: false,
+  showNumber: true,
+  persist: false
+};
 
-/* luhn */
+/* Luhn check */
 function luhn(num){
   num = String(num).replace(/\D/g,'');
   let sum=0, alt=false;
@@ -307,10 +352,10 @@ function luhn(num){
     if(alt){ n*=2; if(n>9) n-=9; }
     sum += n; alt = !alt;
   }
-  return sum % 10 === 0;
+  return (sum % 10) === 0;
 }
 
-/* brand detection & formatting */
+/* Brand detection (kept for display only) */
 function detectBrand(digits){
   if(!digits) return null;
   if(/^4/.test(digits)) return 'visa';
@@ -319,156 +364,273 @@ function detectBrand(digits){
   if(/^6(011|5)/.test(digits) || /^64[4-9]/.test(digits)) return 'discover';
   return 'unknown';
 }
-function formatGroups(digits, brand){
-  if(!digits) return '';
-  if(brand === 'amex'){
-    const a = digits.slice(0,4), b = digits.slice(4,10), c = digits.slice(10,15);
-    return [a,b,c].filter(Boolean).join(' ');
-  } else {
-    return digits.replace(/(.{4})/g,'$1 ').trim();
-  }
-}
-const brandLabelMap = { visa:{name:'VISA',logo:'V'}, mastercard:{name:'MasterCard',logo:'M'}, amex:{name:'AMEX',logo:'AM'}, discover:{name:'Discover',logo:'D'}, unknown:{name:'—',logo:'—'} };
+const brandLabelMap = {
+  visa: {name:'VISA', logo:'V'},
+  mastercard: {name:'MasterCard', logo:'M'},
+  amex: {name:'AMEX', logo:'AM'},
+  discover: {name:'Discover', logo:'D'},
+  unknown: {name:'—', logo:'—'}
+};
 
-/* render */
-function renderBrand(b){ const info = brandLabelMap[b] || brandLabelMap.unknown; if(brandLogo) brandLogo.textContent = info.logo; if(brandName) brandName.textContent = info.name; }
+/* Formatting: always 4-4-4-4 for this build, max 16 digits */
+function formatGroups16(digits){
+  if(!digits) return '';
+  const d = digits.slice(0,16);
+  return d.replace(/(.{4})/g,'$1 ').trim();
+}
+
+/* Render brand and preview */
+function renderBrand(brand){
+  const info = brandLabelMap[brand] || brandLabelMap.unknown;
+  if(brandLogo) brandLogo.textContent = info.logo || '—';
+  if(brandName) brandName.textContent = info.name || '—';
+}
+
 function render(){
-  const d = onlyDigits(cardNumber.value);
-  const brand = detectBrand(d);
-  state.digits = d; state.brand = brand;
+  const rawDigits = onlyDigits(cardNumber.value).slice(0,16); // enforce max 16 digits
+  const brand = detectBrand(rawDigits);
+  state.digits = rawDigits;
+  state.brand = brand;
   renderBrand(brand);
 
-  const formatted = d.length ? formatGroups(d,brand) : '0000 0000 0000 0000';
-  cardView.textContent = d.length ? (state.showNumber ? formatted : formatted.replace(/\d/g,'•')) : '0000 0000 0000 0000';
+  const formatted = rawDigits.length ? formatGroups16(rawDigits) : '0000 0000 0000 0000';
+  cardView.textContent = rawDigits.length ? (state.showNumber ? formatted : formatted.replace(/\d/g,'•')) : '0000 0000 0000 0000';
+
   ownerView.textContent = ownerInput.value || 'الاسم هنا';
   dateView.textContent = expInput.value || 'MM/YY';
 
-  // CVV front
-  const cv = onlyDigits(cvvInput.value);
+  const cv = onlyDigits(cvvInput.value).slice(0,3);
   cardCvvFront.textContent = cv ? (state.showNumber ? cv : '*'.repeat(cv.length)) : '***';
 
-  // CVV length for Amex
-  if(brand === 'amex'){ cvvInput.maxLength = 4; cvvInput.placeholder = '####'; } else { cvvInput.maxLength = 3; cvvInput.placeholder = '***'; }
+  // enforce maxlength on CVV
+  cvvInput.maxLength = 3;
 
   validateAll();
 }
 
-/* validation */
+/* Validation */
 function validateCardNumber(){
   const d = state.digits;
   if(!d){ cardError.setAttribute('aria-hidden','true'); cardError.textContent=''; return false; }
-  const brand = state.brand; const len = d.length;
-  const okLen = (brand === 'amex' && len===15) || (brand !== 'amex' && (len>=13 && len<=19));
-  if(!okLen){ cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'طول رقم البطاقة غير صالح.'; return false; }
-  if(!luhn(d)){ cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'تحقق Luhn فشل — رقم غير صالح.'; return false; }
-  cardError.setAttribute('aria-hidden','true'); cardError.textContent=''; return true;
+  if(d.length !== 16){
+    cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'الرجاء إدخال 16 رقمًا.';
+    return false;
+  }
+  if(!luhn(d)){
+    cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'تحقق Luhn فشل — رقم غير صالح.';
+    return false;
+  }
+  cardError.setAttribute('aria-hidden','true'); cardError.textContent = '';
+  return true;
 }
-function todayYMD(){ const d=new Date(); return { y:d.getFullYear(), m:d.getMonth()+1, day:d.getDate() }; }
-function validateExpiry(){
-  const v=(expInput.value||'').trim(); expError.setAttribute('aria-hidden','true'); expError.textContent='';
-  if(!v) return false;
-  if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(v)){ expError.setAttribute('aria-hidden','false'); expError.textContent='التنسيق يجب أن يكون MM/YY'; return false; }
-  const [mm,yy]=v.split('/'); const year=2000+parseInt(yy,10); const month=parseInt(mm,10); const {y,m}=todayYMD();
-  if(year<y || (year===y && month< m)){ expError.setAttribute('aria-hidden','false'); expError.textContent='البطاقة منتهية الصلاحية.'; return false; }
-  expError.setAttribute('aria-hidden','true'); expError.textContent=''; return true;
-}
-function validateCVV(){
-  const cv = onlyDigits(cvvInput.value); const brand = state.brand;
-  if(!cv){ cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return false; }
-  if(brand === 'amex'){ if(cv.length !== 4){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='رمز Amex يتكون من 4 أرقام.'; return false; } }
-  else { if(cv.length !==3){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='CVV يجب أن يتكون من 3 أرقام.'; return false; } }
-  cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return true;
-}
-function validateAll(){ const c = validateCardNumber(), e = validateExpiry(), v = validateCVV(); const all = c && e && v; submitBtn.disabled = !all; state.valid = all; return all; }
 
-/* input handlers */
+function todayYMD(){
+  const d = new Date();
+  return { y: d.getFullYear(), m: d.getMonth()+1, day: d.getDate() };
+}
+
+function validateExpiry(){
+  const v = (expInput.value || '').trim();
+  expError.setAttribute('aria-hidden','true'); expError.textContent='';
+  if(!v) return false;
+  if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(v)){
+    expError.setAttribute('aria-hidden','false'); expError.textContent='التنسيق يجب أن يكون MM/YY';
+    return false;
+  }
+  const [mm,yy] = v.split('/');
+  const year = 2000 + parseInt(yy,10);
+  const month = parseInt(mm,10);
+  const {y,m} = todayYMD();
+  if(year < y || (year === y && month < m)){
+    expError.setAttribute('aria-hidden','false'); expError.textContent='البطاقة منتهية الصلاحية.';
+    return false;
+  }
+  expError.setAttribute('aria-hidden','true'); expError.textContent='';
+  return true;
+}
+
+function validateCVV(){
+  const cv = onlyDigits(cvvInput.value).slice(0,3);
+  if(!cv){ cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return false; }
+  if(cv.length !== 3){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='CVV يجب أن يتكون من 3 أرقام.'; return false; }
+  cvvError.setAttribute('aria-hidden','true'); cvvError.textContent='';
+  return true;
+}
+
+function validateAll(){
+  const c = validateCardNumber();
+  const e = validateExpiry();
+  const v = validateCVV();
+  const all = c && e && v;
+  submitBtn.disabled = !all;
+  state.valid = all;
+  return all;
+}
+
+/* Input handlers: ensure LTR input and cap digits */
 cardNumber.addEventListener('input', e=>{
-  let raw = onlyDigits(e.target.value).slice(0,19);
-  const brand = detectBrand(raw);
-  e.target.value = formatGroups(raw,brand);
-  setTimeout(()=> e.target.setSelectionRange(e.target.value.length, e.target.value.length),0);
+  // allow only digits, cap to 16, format groups of 4
+  const raw = onlyDigits(e.target.value).slice(0,16);
+  e.target.value = formatGroups16(raw);
+  // place caret at end (simple approach)
+  setTimeout(()=> {
+    e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+  }, 0);
   render();
 });
+
+/* Prevent paste of long data that would exceed 16 digits */
 cardNumber.addEventListener('paste', e=>{
   e.preventDefault();
-  const txt = (e.clipboardData||window.clipboardData).getData('text');
-  const digits = onlyDigits(txt).slice(0,19);
+  const txt = (e.clipboardData || window.clipboardData).getData('text');
+  const digits = onlyDigits(txt).slice(0,16);
   if(!digits) return;
-  cardNumber.value = formatGroups(digits, detectBrand(digits));
+  cardNumber.value = formatGroups16(digits);
   render();
 });
-pasteBtn.addEventListener('click', async ()=>{
-  try{ const txt = await navigator.clipboard.readText(); const digits = onlyDigits(txt).slice(0,19); if(!digits){ showToast('لا يوجد أرقام في الحافظة'); return; } cardNumber.value = formatGroups(digits, detectBrand(digits)); render(); showToast('تم لصق الأرقام من الحافظة'); } catch(err){ showToast('فشل الوصول إلى الحافظة'); console.error(err); }
+
+/* expiry formatting */
+expInput.addEventListener('input', e=>{
+  let v = onlyDigits(e.target.value).slice(0,4);
+  if(v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+  e.target.value = v;
+  render();
 });
 
-expInput.addEventListener('input', e=>{ let v = onlyDigits(e.target.value).slice(0,4); if(v.length>2) v = v.slice(0,2) + '/' + v.slice(2); e.target.value = v; render(); });
+/* owner */
 ownerInput.addEventListener('input', ()=>{ render(); markDirty(); });
-cvvInput.addEventListener('input', e=>{ e.target.value = onlyDigits(e.target.value).slice(0,4); render(); });
 
-/* NOTE: removed flipping behavior — CVV stays visible on front per request */
+/* cvv */
+cvvInput.addEventListener('input', e=>{
+  e.target.value = onlyDigits(e.target.value).slice(0,3);
+  render();
+});
 
-/* show/hide numbers */
+/* show/hide numbers button */
 showNumberBtn.addEventListener('click', ()=>{
   state.showNumber = !state.showNumber;
   showNumberBtn.setAttribute('aria-pressed', String(state.showNumber));
-  showNumberBtn.textContent = state.showNumber ? '🙈' : '👁️';
+  showNumberBtn.textContent = state.showNumber ? '🙈 إظهار' : '👁️ إخفاء';
   render();
 });
 
 /* persist toggle */
 persistToggle.addEventListener('change', (e)=>{
   state.persist = e.target.checked;
-  if(state.persist){ saveFormToLocal(); showToast('تم حفظ الإعدادات محليًا'); }
-  else { localStorage.removeItem('demo_form'); showToast('تم تعطيل الحفظ المحلي'); }
+  if(state.persist){
+    saveFormToLocal();
+    showToast('تم حفظ الإعدادات محليًا');
+  } else {
+    localStorage.removeItem('demo_form');
+    showToast('تم تعطيل الحفظ المحلي');
+  }
 });
 
-/* submit (simulated) */
-document.getElementById('eligibilityForm').addEventListener('submit', async (ev)=>{
-  ev.preventDefault();
+/* submission (simulated) */
+document.getElementById('eligibilityForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
   if(!validateAll()){ showToast('من فضلك صحّح الأخطاء قبل الإرسال.'); return; }
-  submitBtn.disabled = true; const prev = submitBtn.textContent; submitBtn.textContent = 'جارٍ التحقق...';
+  submitBtn.disabled = true;
+  const prevText = submitBtn.textContent;
+  submitBtn.textContent = 'جارٍ التحقق...';
   await new Promise(r=>setTimeout(r,900));
-  showToast('تمت الموافقة — (محليًا، لا يتم إرسال بيانات)');
-  submitBtn.textContent = prev; submitBtn.disabled = false;
-  card.style && (card.style.boxShadow = '0 30px 80px rgba(16,185,129,.12)');
-  setTimeout(()=>{ if(card && card.style) card.style.boxShadow=''; },1200);
+  showToast('تمت الموافقة — لا يتم إرسال أي بيانات خارج المتصفح', 3000);
+  submitBtn.textContent = prevText;
+  submitBtn.disabled = false;
+  // small visual success
+  const cardEl = $('#card');
+  cardEl.style.boxShadow = '0 30px 80px rgba(16,185,129,.12)';
+  setTimeout(()=> cardEl.style.boxShadow = '', 1200);
   if(state.persist) saveFormToLocal();
 });
 
-/* local save/restore */
-function saveFormToLocal(){ try{ const payload = { card: onlyDigits(cardNumber.value), owner: ownerInput.value||'', exp: expInput.value||'', cvv: cvvInput.value||'', brand: state.brand||null, dateSaved: new Date().toISOString() }; localStorage.setItem('demo_form', JSON.stringify(payload)); }catch(e){} }
-function restoreFormFromLocal(){ try{ const raw = localStorage.getItem('demo_form'); if(!raw) return; const data = JSON.parse(raw); if(data.card) cardNumber.value = formatGroups(data.card, detectBrand(data.card)); ownerInput.value = data.owner||''; expInput.value = data.exp||''; cvvInput.value = data.cvv||''; render(); showToast('تم استعادة بيانات محفوظة محليًا'); }catch(e){} }
+/* local save / restore */
+function saveFormToLocal(){
+  try{
+    const payload = {
+      card: onlyDigits(cardNumber.value),
+      owner: ownerInput.value || '',
+      exp: expInput.value || '',
+      cvv: cvvInput.value || '',
+      brand: state.brand || null,
+      dateSaved: new Date().toISOString()
+    };
+    localStorage.setItem('demo_form', JSON.stringify(payload));
+  }catch(e){}
+}
+function restoreFormFromLocal(){
+  try{
+    const raw = localStorage.getItem('demo_form');
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(data.card) cardNumber.value = formatGroups16(data.card);
+    ownerInput.value = data.owner || '';
+    expInput.value = data.exp || '';
+    cvvInput.value = data.cvv || '';
+    render();
+    showToast('تم استعادة بيانات محفوظة محليًا');
+  }catch(e){}
+}
+
+/* init */
 (function init(){
+  // ensure inputs behave LTR (digits start from left)
+  [cardNumber, expInput, cvvInput].forEach(i=>{
+    if(i) { i.style.direction = 'ltr'; i.style.textAlign = 'left'; }
+  });
+
+  // restore if persisted
   const existing = localStorage.getItem('demo_form');
-  if(existing){ persistToggle.checked = true; state.persist = true; restoreFormFromLocal(); }
+  if(existing){
+    persistToggle.checked = true;
+    state.persist = true;
+    restoreFormFromLocal();
+  }
+
+  // initial button state
   showNumberBtn.setAttribute('aria-pressed', String(state.showNumber));
-  showNumberBtn.textContent = state.showNumber ? '🙈' : '👁️';
+  showNumberBtn.textContent = state.showNumber ? '🙈 إظهار' : '👁️ إخفاء';
   render();
+
+  // initial aria states
+  cardError && cardError.setAttribute('aria-hidden','true');
+  expError && expError.setAttribute('aria-hidden','true');
+  cvvError && cvvError.setAttribute('aria-hidden','true');
 })();
 
-/* toast */
+/* small utilities */
 let toastTimeout = null;
-function showToast(msg, ms=1600){ toast.textContent = msg; toast.style.display = 'block'; if(toastTimeout) clearTimeout(toastTimeout); toastTimeout = setTimeout(()=>{ toast.style.display = 'none'; toastTimeout = null; }, ms); }
+function showToast(msg, ms=1600){
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  if(toastTimeout) clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(()=>{ toast.style.display = 'none'; toastTimeout = null; }, ms);
+}
 
-/* keyboard submit */
+/* keyboard: Enter submits when valid */
 [cardNumber, expInput, cvvInput, ownerInput].forEach(el=>{
   el && el.addEventListener('keydown', (ev)=>{
-    if(ev.key === 'Enter'){ ev.preventDefault(); if(state.valid) document.getElementById('eligibilityForm').dispatchEvent(new Event('submit',{cancelable:true})); else { validateAll(); showToast('يرجى إكمال الحقول المطلوبة'); } }
+    if(ev.key === 'Enter'){
+      ev.preventDefault();
+      if(state.valid){
+        document.getElementById('eligibilityForm').dispatchEvent(new Event('submit',{cancelable:true}));
+      } else {
+        validateAll();
+        showToast('يرجى إكمال الحقول المطلوبة');
+      }
+    }
   });
 });
 
 /* dirty guard */
 let isDirty = false;
 function markDirty(){ isDirty = true; }
-['input','change'].forEach(evt=> document.getElementById('eligibilityForm').addEventListener(evt, ()=>{ isDirty = true; }));
-
-window.addEventListener('beforeunload', (e)=>{ if(isDirty){ e.preventDefault(); e.returnValue=''; } });
-
-/* init ARIA states */
-cardError && cardError.setAttribute('aria-hidden','true');
-expError && expError.setAttribute('aria-hidden','true');
-cvvError && cvvError.setAttribute('aria-hidden','true');
+['input','change'].forEach(evt=>{
+  document.getElementById('eligibilityForm').addEventListener(evt, ()=>{ isDirty = true; });
+});
+window.addEventListener('beforeunload', (e)=>{
+  if(isDirty){ e.preventDefault(); e.returnValue = ''; }
+});
 </script>
-
 </body>
 </html>
