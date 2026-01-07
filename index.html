@@ -6,31 +6,21 @@
 <title>الحصول على رصيد مالي — بقيمة 100 دينار</title>
 <meta name="description" content="نموذج عرض توضيحي لطلب استحقاق رصيد — يعمل محليًا، لا يتم إرسال أو نقل أي بيانات خارج المتصفح." />
 <link rel="icon" href="data:,">
-<!-- Optional: you may uncomment a webfont link if you want to load fonts from Google -->
-<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"> -->
 
 <style>
 /* ===============================
    Variables & Reset
    =============================== */
 :root{
-  --bg: #0f172a; /* default dark bg (overridden with body) */
+  --bg: #0f172a;
   --surface: #ffffff;
-  --card-grad-1: linear-gradient(135deg,#07103a,#082b4a);
-  --glass: rgba(255,255,255,.06);
   --accent: #06b6d4;
   --accent-2: #3b82f6;
-  --gold: #facc15;
   --muted: #94a3b8;
   --text: #0f172a;
-  --success: #10b981;
-  --danger: #ef4444;
   --shadow: 0 18px 50px rgba(2,8,23,.18);
   --radius: 16px;
-  --glass-2: rgba(255,255,255,.04);
   --focus: 0 8px 30px rgba(37,99,235,.12);
-  --glass-strong: rgba(255,255,255,.08);
-  --card-w: 100%;
   font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans Arabic", sans-serif;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
@@ -44,7 +34,7 @@ body{
   background:linear-gradient(180deg,#eef2ff 0%, #f8fafc 100%);
   color:var(--text);
   direction:rtl;
-  padding:18px;
+  padding:12px;
   display:flex;
   align-items:flex-start;
   justify-content:center;
@@ -55,9 +45,9 @@ body{
 /* container */
 .app{
   width:100%;
-  max-width:680px;
+  max-width:820px;
   margin:6px;
-  padding:18px;
+  padding:12px;
   background:transparent;
 }
 
@@ -65,41 +55,32 @@ body{
 .hero{
   background:linear-gradient(135deg,#0b1c2d,#0f172a);
   color:white;
-  border-radius:20px;
-  padding:16px;
+  border-radius:14px;
+  padding:12px;
   box-shadow:var(--shadow);
   position:relative;
   overflow:hidden;
   display:flex;
-  gap:16px;
+  gap:12px;
   align-items:center;
   justify-content:space-between;
   flex-wrap:wrap;
 }
-.hero-left{display:flex;gap:14px;align-items:center}
-.brand-badge{
-  width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#ffd166,#ffb703);display:flex;align-items:center;justify-content:center;font-weight:900;color:#05203a;font-size:20px;box-shadow:0 8px 30px rgba(15,23,42,.18)
-}
-.hero h1{font-size:18px;margin:0;font-weight:800}
-.hero p{margin:0;color:rgba(255,255,255,.9);font-size:13px}
-
-/* controls in header */
-.header-controls{display:flex;gap:8px;align-items:center}
-.small-btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(255,255,255,.95);font-weight:700;cursor:pointer}
-.small-btn[aria-pressed="true"]{background:rgba(255,255,255,.06)}
+.brand-badge{ width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#ffd166,#ffb703);display:flex;align-items:center;justify-content:center;font-weight:900;color:#05203a;font-size:18px;box-shadow:0 8px 30px rgba(15,23,42,.18) }
+.hero h1{font-size:16px;margin:0;font-weight:800}
 
 /* trust bar */
 .trust-bar{
   display:flex;
   gap:8px;
-  margin:14px 0;
+  margin:12px 0;
   align-items:center;
 }
 .trust{
   flex:1;
   background:var(--surface);
-  border-radius:12px;
-  padding:10px;
+  border-radius:10px;
+  padding:8px;
   font-size:13px;
   text-align:center;
   color:var(--muted);
@@ -107,265 +88,169 @@ body{
   box-shadow:0 8px 20px rgba(2,8,23,.04);
 }
 
-/* layout: card preview + form columns on wide screens */
-/* reduced gap and aligned items to bring card and form closer together */
+/* layout: card preview + form columns on wide screens
+   NOTE: made much closer and side-by-side by reducing gap and using tighter columns */
 .main-grid{
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:6px; /* further reduce gap to bring preview closer to form */
-  margin-top:8px; /* reduce top spacing */
-  align-items:start; /* align both columns to top */
+  grid-template-columns: 46% 54%; /* tighter side-by-side columns */
+  gap:4px; /* very small gap so they appear next to each other */
+  margin-top:6px;
+  align-items:start;
 }
+/* keep stacking on small screens */
 @media (max-width:900px){
-  .main-grid{grid-template-columns:1fr}
+  .main-grid{grid-template-columns:1fr; gap:10px}
 }
 
 /* card preview (front/back flip) */
 .card-wrap{
   perspective:1200px;
   position:relative;
-  margin-top:0;
+  margin:0; /* removed extra spacing */
 }
+/* make card visually a bit narrower and more compact so it sits next to the form */
 .card{
   width:100%;
-  border-radius:var(--radius);
-  min-height:190px;
+  border-radius:12px;
+  min-height:160px;
   transform-style:preserve-3d;
-  transition:transform .7s cubic-bezier(.2,.9,.3,1), box-shadow .3s ease;
+  transition:transform .6s cubic-bezier(.2,.9,.3,1), box-shadow .25s ease;
   position:relative;
   overflow:hidden;
 }
-.card.is-flipped{transform:rotateY(180deg)}
 .card-face{
   position:relative;
   backface-visibility:hidden;
-  border-radius:var(--radius);
-  padding:18px;
+  border-radius:12px;
+  padding:12px;
   color:#fff;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   box-shadow:var(--shadow);
-  min-height:190px;
+  min-height:160px;
 }
-.card-front{
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
-  transform:translateZ(0);
-}
-.card-back{
-  background:linear-gradient(135deg,#0f172a,#071033);
-  transform:rotateY(180deg);
-}
+.card-front{ background:linear-gradient(135deg,#1e3a8a,#2563eb); transform:translateZ(0); }
+.card-back{ background:linear-gradient(135deg,#0f172a,#071033); transform:rotateY(180deg); }
 
-/* front layout */
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:13px;
-  opacity:.95;
-}
-.brand{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  font-weight:800;
-  font-size:13px;
-  text-transform:uppercase;
-}
-.brand .logo{
-  width:48px;height:32px;border-radius:8px;background:linear-gradient(90deg,#fff8cc,#ffd166);display:flex;align-items:center;justify-content:center;font-weight:800;color:#05203a;font-size:13px;
-}
-.chip{
-  width:46px;height:28px;border-radius:6px;background:linear-gradient(135deg,#fde68a,#facc15);
-}
+/* front layout (slightly smaller fonts) */
+.card-top{ display:flex; justify-content:space-between; align-items:center; font-size:12px; opacity:.95; }
+.brand{ display:flex; gap:10px; align-items:center; font-weight:800; font-size:12px; text-transform:uppercase; }
+.brand .logo{ width:44px;height:28px;border-radius:8px;background:linear-gradient(90deg,#fff8cc,#ffd166);display:flex;align-items:center;justify-content:center;font-weight:800;color:#05203a;font-size:12px; }
+.chip{ width:40px;height:24px;border-radius:6px;background:linear-gradient(135deg,#fde68a,#facc15); }
 .card-number{
-  font-size:20px;
+  font-size:18px;
   font-weight:800;
   letter-spacing:2px;
   direction:ltr;
   text-align:left;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.18));
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.12));
 }
-.card-meta{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  gap:10px;
-}
-.small-muted{color:rgba(255,255,255,.9);font-weight:700}
+.card-meta{ display:flex; justify-content:space-between; font-size:11px; gap:8px; }
+.small-muted{ color:rgba(255,255,255,.9); font-weight:700; }
 
 /* back layout */
-.back-strip{
-  height:48px;
-  background:#000;
-  opacity:.9;
-  border-radius:8px;
-  margin-top:8px;
-  box-shadow:inset 0 -4px 10px rgba(0,0,0,.4);
-}
-.cvv-box{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  justify-content:flex-start;
-  margin-top:12px;
-}
-.cvv-field{
-  background:rgba(255,255,255,.12);
-  color:#fff;
-  padding:8px 12px;
-  border-radius:8px;
-  font-weight:800;
-  letter-spacing:2px;
-}
+.back-strip{ height:42px; background:#000; opacity:.9; border-radius:8px; margin-top:8px; box-shadow:inset 0 -4px 10px rgba(0,0,0,.4); }
+.cvv-field{ background:rgba(255,255,255,.12); color:#fff; padding:6px 10px; border-radius:8px; font-weight:800; letter-spacing:2px; }
 
-/* form section */
+/* form section: make it more compact to fit tightly next to card */
 .section{
   background:var(--surface);
-  border-radius:14px;
-  padding:16px;
-  box-shadow:0 14px 40px rgba(2,8,23,.06);
-  margin-top:0;
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 10px 30px rgba(2,8,23,.06);
+  margin:0;
 }
-.form-row{display:flex;gap:12px;margin-top:12px;align-items:flex-start;flex-wrap:wrap}
+.form-row{ display:flex; gap:10px; margin-top:10px; align-items:flex-start; flex-wrap:wrap; }
 .input{
   width:100%;
-  padding:12px 14px;
-  border-radius:12px;
+  padding:10px 12px;
+  border-radius:10px;
   border:1px solid #e6eef8;
-  font-size:15px;
-  transition:box-shadow .18s,transform .18s,border-color .18s;
+  font-size:14px;
+  transition:box-shadow .14s,transform .14s,border-color .14s;
   background:transparent;
   outline:none;
 }
-.input:focus{
-  box-shadow:var(--focus);
-  border-color:var(--accent);
-  transform:translateY(-1px);
-}
-.label{font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:700;display:block}
+.input:focus{ box-shadow:var(--focus); border-color:var(--accent); transform:translateY(-1px); }
+.label{ font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:700; display:block }
 
 /* cc-group */
-.cc-group{display:flex;gap:8px;align-items:center}
-.cc-input{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Helvetica Neue", monospace;letter-spacing:2px}
+.cc-group{ display:flex; gap:8px; align-items:center }
+.cc-input{ font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Helvetica Neue", monospace; letter-spacing:2px }
 
 /* helper / hint / error */
-.hint{font-size:13px;color:var(--muted);margin-top:8px}
-.error{font-size:13px;color:var(--danger);margin-top:8px;display:none}
-.error[aria-hidden="false"]{display:block}
+.hint{ font-size:13px; color:var(--muted); margin-top:8px }
+.error{ font-size:13px; color:#ef4444; margin-top:8px; display:none }
+.error[aria-hidden="false"]{ display:block }
 
-/* sticky submit */
-.actions{
-  position:sticky;
-  bottom:12px;
-  margin-top:14px;
-  background:transparent;
-  padding-top:8px;
-}
-.btn{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:none;
-  background:linear-gradient(90deg,var(--accent-2),var(--accent));
-  color:white;
-  font-weight:900;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(37,99,235,.18);
-}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.meta-footer{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+/* actions */
+.actions{ position:sticky; bottom:8px; margin-top:12px; background:transparent; padding-top:6px; }
+.btn{ width:100%; padding:12px; border-radius:10px; border:none; background:linear-gradient(90deg,var(--accent-2),var(--accent)); color:white; font-weight:900; font-size:15px; cursor:pointer; box-shadow:0 8px 26px rgba(37,99,235,.14); }
+.btn:disabled{ opacity:.6; cursor:not-allowed }
+.meta-footer{ font-size:12px; color:var(--muted); text-align:center; margin-top:8px }
 
-/* sample cards */
-.examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.example-btn{flex:1;min-width:120px;padding:10px;border-radius:10px;border:1px solid #e8f0ff;background:#fbfdff;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center}
-.example-btn svg{width:20px;height:20px;opacity:.9}
-
-/* show/hide eye */
-.icon-btn{background:transparent;border:none;padding:8px;border-radius:10px;cursor:pointer;font-weight:800}
-.icon-btn:focus{outline:3px solid rgba(37,99,235,.12)}
-
-/* toast */
-.toast{
-  position:fixed;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:28px;
-  background:linear-gradient(90deg,#10b981,#06b6d4);
-  color:white;padding:12px 18px;border-radius:12px;box-shadow:0 14px 40px rgba(2,8,23,.18);display:none;font-weight:700;z-index:60;
-}
-.toast.show{display:block;animation:pop .36s ease}
-
-@keyframes pop{0%{transform:translateX(-50%) translateY(18px) scale(.98);opacity:0}100%{transform:translateX(-50%) translateY(0) scale(1);opacity:1}}
-
-/* small screens */
+/* small screens adjustments */
 @media (max-width:520px){
-  .card-number{font-size:18px}
-  .hero h1{font-size:16px}
-  .brand-badge{width:48px;height:48px;font-size:18px}
-  .main-grid{gap:10px}
-  .card-face{padding:14px;min-height:160px}
+  .card-number{ font-size:16px }
+  .hero h1{ font-size:15px }
+  .brand-badge{ width:44px; height:44px; font-size:16px }
+  .card-face{ padding:10px; min-height:150px }
+  .main-grid{ gap:12px }
 }
 
+/* optional: if you want them even more "glued", uncomment the rule below
+   .card { margin-inline-end: -18px; }  */
 /* focus-visible */
-:focus{outline:none}
-:focus-visible{box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+:focus{ outline:none }
+:focus-visible{ box-shadow:0 0 0 4px rgba(37,99,235,.12) }
 </style>
 </head>
 <body>
 
 <main class="app" aria-labelledby="pageTitle">
-  <!-- HERO -->
   <header class="hero" role="banner">
     <div class="hero-left">
       <div class="brand-badge" aria-hidden="true">💳</div>
       <div>
         <h1 id="pageTitle">الحصول على رصيد مالي — بقيمة 100 دينار</h1>
-        <!-- subtitle removed as requested -->
       </div>
     </div>
-
-    <div class="header-controls" role="group" aria-label="خيارات">
-      <!-- removed theme/copy/save buttons as requested (kept container empty) -->
-    </div>
+    <div class="header-controls" role="group" aria-label="خيارات"></div>
   </header>
 
-  <!-- TRUST -->
-  <div class="trust-bar" aria-hidden="false" style="margin-top:12px">
+  <div class="trust-bar" aria-hidden="false">
     <div class="trust">🔒 بياناتك تبقى على جهازك</div>
     <div class="trust">🛡️ تحقق محلي فوري</div>
     <div class="trust">⚖️ تجربة متوافقة</div>
   </div>
 
   <div class="main-grid" aria-live="polite">
-    <!-- LEFT: Card preview -->
+    <!-- Card preview -->
     <section class="card-wrap" aria-hidden="false">
       <div id="card" class="card" aria-hidden="false" aria-label="معاينة البطاقة">
-        <!-- FRONT -->
         <div class="card-face card-front" id="cardFront">
           <div class="card-top">
-            <div style="display:flex;gap:10px;align-items:center">
+            <div style="display:flex;gap:8px;align-items:center">
               <div class="chip" aria-hidden="true"></div>
               <div class="brand" id="brandLabel" aria-hidden="false">
                 <div class="logo" id="brandLogo">—</div>
-                <div id="brandName" style="font-size:13px;opacity:.95">—</div>
+                <div id="brandName" style="font-size:12px;opacity:.95">—</div>
               </div>
             </div>
-            <div style="text-align:left;font-size:12px;opacity:.9">صالحة حتى</div>
+            <div style="text-align:left;font-size:11px;opacity:.9">صالحة حتى</div>
           </div>
 
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
             <div style="flex:1">
               <div class="card-number" id="cardView" aria-live="polite" aria-atomic="true">0000 0000 0000 0000</div>
-              <div class="card-meta" style="margin-top:10px">
+              <div class="card-meta" style="margin-top:8px">
                 <div>
-                  <div style="font-size:11px;opacity:.9">مالك البطاقة</div>
+                  <div style="font-size:10px;opacity:.9">مالك البطاقة</div>
                   <div class="small-muted" id="ownerView">الاسم هنا</div>
                 </div>
                 <div style="text-align:left">
-                  <div style="font-size:11px;opacity:.9">انتهاء</div>
+                  <div style="font-size:10px;opacity:.9">انتهاء</div>
                   <div class="small-muted" id="dateView">MM/YY</div>
                 </div>
               </div>
@@ -373,10 +258,9 @@ body{
           </div>
         </div>
 
-        <!-- BACK -->
         <div class="card-face card-back" id="cardBack" aria-hidden="true" aria-label="ظهر البطاقة">
           <div class="back-strip" aria-hidden="true"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
             <div style="flex:1">
               <div style="font-size:11px;color:rgba(255,255,255,.85)">التوقيع</div>
               <div style="background:#fff;color:#111;padding:6px 8px;border-radius:6px;margin-top:6px;font-weight:700">-- توقيع --</div>
@@ -389,19 +273,15 @@ body{
         </div>
       </div>
 
-      <!-- small helpers under card -->
-      <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
-        <button id="showNumberBtn" aria-pressed="false" class="icon-btn" title="إظهار/إخفاء رقم البطاقة" aria-label="إظهار أو إخفاء رقم البطاقة">👁️</button>
-        <div style="flex:1" class="hint">اضغط على CVV لعرض ظهر البطاقة. يمكنك استخدام أزرار الأمثلة لإدخال أرقام اختبارية بسرعة.</div>
+      <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+        <button id="showNumberBtn" aria-pressed="true" class="icon-btn" title="إظهار/إخفاء رقم البطاقة" aria-label="إظهار أو إخفاء رقم البطاقة">🙈</button>
+        <div style="flex:1" class="hint">اضغط على CVV لعرض ظهر البطاقة. يمكنك لصق الأرقام أو كتابتها لعرضها مباشرة على المعاينة.</div>
       </div>
     </section>
 
-    <!-- RIGHT: Form -->
-    <form id="eligibilityForm" class="section" novalidate aria-describedby="" autocomplete="off">
-      <!-- formNote removed as requested -->
-
-      <!-- Card number (single smart input) -->
-      <div style="margin-top:8px">
+    <!-- Form -->
+    <form id="eligibilityForm" class="section" novalidate autocomplete="off">
+      <div style="margin-top:4px">
         <label for="cardNumber" class="label">رقم البطاقة</label>
         <div class="cc-group" role="group" aria-labelledby="cardNumber">
           <input id="cardNumber" class="input cc-input" type="text" inputmode="numeric"
@@ -409,14 +289,10 @@ body{
                  name="cc-number" aria-label="رقم البطاقة">
           <button type="button" id="pasteBtn" class="small-btn" title="لصق" aria-label="لصق من الحافظة">لصق</button>
         </div>
-        <!-- cardHelp removed as requested -->
         <div id="cardError" class="error" role="alert" aria-hidden="true"></div>
       </div>
 
-      <!-- examples removed as requested -->
-
-      <!-- Name + Expiry + CVV -->
-      <div class="form-row" style="margin-top:12px">
+      <div class="form-row" style="margin-top:10px">
         <div style="flex:1">
           <label for="owner" class="label">اسم صاحب البطاقة</label>
           <input id="owner" class="input" type="text" placeholder="الاسم كما على البطاقة" autocomplete="cc-name" name="cc-name" />
@@ -437,16 +313,14 @@ body{
         </div>
       </div>
 
-      <!-- saving toggle -->
-      <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
         <input type="checkbox" id="persistToggle" />
         <label for="persistToggle" class="hint" style="margin:0">حفظ النموذج محليًا في هذا المتصفح (اختياري)</label>
       </div>
 
-      <!-- actions -->
       <div class="actions">
         <button id="submitBtn" class="btn" type="submit" disabled>إرسال طلب الاستحقاق</button>
-        <div class="meta-footer" style="margin-top:10px">
+        <div class="meta-footer" style="margin-top:8px">
           <span id="liveStatus" aria-live="polite"></span>
         </div>
       </div>
@@ -455,68 +329,47 @@ body{
 </main>
 
 <!-- toast -->
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" role="status" aria-live="polite" style="position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:linear-gradient(90deg,#10b981,#06b6d4);color:white;padding:10px 14px;border-radius:10px;box-shadow:0 14px 40px rgba(2,8,23,.18);display:none;font-weight:700;z-index:60;"></div>
 
 <script>
-/*
-  Enhanced demo script (محلي تمامًا):
-  - تنسيق ذكي لرقم البطاقة (Amex 4-6-5) مع إدارة التعقب البسيطة للمؤشر.
-  - اكتشاف علامة البطاقة، تعديل طول CVV، تحقق Luhn، تحقق تاريخ انتهاء دقيق.
-  - لصق من الحافظة، إظهار/إخفاء رقم البطاقة، حفظ اختياري في localStorage.
-  - تحسينات وصول ARIA، ومنع مغادرة الصفحة إذا النموذج متغير.
-  - لا يتم إرسال أي بيانات خارج المتصفح.
-*/
-
 /* Helpers */
 const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
 const onlyDigits = s => (s||'').replace(/\D/g,'');
-const todayYMD = () => {
-  const d=new Date();
-  return { y: d.getFullYear(), m: d.getMonth() + 1, day: d.getDate() };
-};
 
-/* Luhn algorithm */
+/* Luhn */
 function luhn(num){
   num = String(num).replace(/\D/g,'');
   let sum=0, alt=false;
   for(let i=num.length-1;i>=0;i--){
     let n=parseInt(num[i],10);
-    if(alt){
-      n*=2;
-      if(n>9) n-=9;
-    }
+    if(alt){ n*=2; if(n>9) n-=9; }
     sum += n;
     alt = !alt;
   }
   return (sum % 10) === 0;
 }
 
-/* Card brand detection (simple BIN-based) */
+/* brand detection */
 function detectBrand(digits){
   if(!digits) return null;
   if(/^4/.test(digits)) return 'visa';
-  if(/^5[1-5]/.test(digits) || /^2(2[2-9]|[3-6]\\d|7[01])/.test(digits)) return 'mastercard';
+  if(/^5[1-5]/.test(digits) || /^2(2[2-9]|[3-6]\d|7[01])/.test(digits)) return 'mastercard';
   if(/^3[47]/.test(digits)) return 'amex';
   if(/^6(011|5)/.test(digits) || /^64[4-9]/.test(digits)) return 'discover';
   return 'unknown';
 }
 
-/* formatting groups */
+/* format */
 function formatGroups(digits, brand){
   if(!digits) return '';
   if(brand === 'amex'){
-    // 4-6-5
-    const a = digits.slice(0,4);
-    const b = digits.slice(4,10);
-    const c = digits.slice(10,15);
+    const a = digits.slice(0,4), b = digits.slice(4,10), c = digits.slice(10,15);
     return [a,b,c].filter(Boolean).join(' ');
   } else {
     return digits.replace(/(.{4})/g,'$1 ').trim();
   }
 }
 
-/* Simple mapping for display */
 const brandLabelMap = {
   visa: {name:'VISA', logo:'V'},
   mastercard: {name:'MasterCard', logo:'M'},
@@ -525,7 +378,7 @@ const brandLabelMap = {
   unknown: {name:'—', logo:'—'}
 };
 
-/* DOM elements */
+/* DOM */
 const cardNumber = $('#cardNumber');
 const brandLogo = $('#brandLogo');
 const brandName = $('#brandName');
@@ -549,115 +402,77 @@ const pasteBtn = $('#pasteBtn');
 const showNumberBtn = $('#showNumberBtn');
 const persistToggle = $('#persistToggle');
 
-const exampleButtons = $$('.example-btn'); // will be empty if examples removed
-
-/* State */
 let state = {
   digits: '',
   brand: null,
   valid: false,
-  showNumber: true, // <-- show card digits on the preview by default
+  showNumber: true,
   persist: false
 };
 
-/* Update visual brand */
 function renderBrand(brand){
   const info = brandLabelMap[brand] || brandLabelMap.unknown;
   brandName.textContent = info.name || '—';
   brandLogo.textContent = info.logo || '—';
 }
 
-/* Update full preview */
+function todayYMD(){
+  const d=new Date(); return { y: d.getFullYear(), m: d.getMonth()+1, day: d.getDate() };
+}
+
 function render(){
   const d = onlyDigits(cardNumber.value);
   const brand = detectBrand(d);
   state.digits = d;
   state.brand = brand;
   renderBrand(brand);
-  // formatting
   const formatted = d.length ? formatGroups(d, brand) : '0000 0000 0000 0000';
   cardView.textContent = d.length ? (state.showNumber ? formatted : formatted.replace(/\d/g,'•')) : '0000 0000 0000 0000';
-  // owner display
   ownerView.textContent = ownerInput.value || 'الاسم هنا';
-  // date
   dateView.textContent = expInput.value || 'MM/YY';
-  // cvv preview: show actual digits when state.showNumber true (user requested visible)
   const cv = onlyDigits(cvvInput.value);
-  if(cv){
-    cvvView.textContent = state.showNumber ? cv : '*'.repeat(cv.length);
-  } else {
-    cvvView.textContent = '***';
-  }
+  cvvView.textContent = cv ? (state.showNumber ? cv : '*'.repeat(cv.length)) : '***';
 
-  // adapt CVV maxlength for Amex
-  if(brand === 'amex'){
-    cvvInput.maxLength = 4;
-    cvvInput.placeholder = '####';
-  } else {
-    cvvInput.maxLength = 3;
-    cvvInput.placeholder = '***';
-  }
+  if(brand === 'amex'){ cvvInput.maxLength = 4; cvvInput.placeholder = '####'; }
+  else { cvvInput.maxLength = 3; cvvInput.placeholder = '***'; }
 
   validateAll();
 }
 
-/* Validation functions */
+/* validation */
 function validateCardNumber(){
   const d = state.digits;
-  if(!d) {
-    cardError.setAttribute('aria-hidden','true'); cardError.textContent=''; return false;
-  }
+  if(!d){ cardError.setAttribute('aria-hidden','true'); cardError.textContent=''; return false; }
   const brand = state.brand;
   const len = d.length;
   const okLen = (brand === 'amex' && len===15) || (brand !== 'amex' && (len>=13 && len<=19));
-  if(!okLen){
-    cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'طول رقم البطاقة غير صالح.';
-    return false;
-  }
-  if(!luhn(d)){
-    cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'تحقق Luhn فشل — رقم غير صالح.';
-    return false;
-  }
-  cardError.setAttribute('aria-hidden','true'); cardError.textContent='';
-  return true;
+  if(!okLen){ cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'طول رقم البطاقة غير صالح.'; return false; }
+  if(!luhn(d)){ cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'تحقق Luhn فشل — رقم غير صالح.'; return false; }
+  cardError.setAttribute('aria-hidden','true'); cardError.textContent=''; return true;
 }
 
 function validateExpiry(){
   const v = (expInput.value || '').trim();
   expError.setAttribute('aria-hidden','true'); expError.textContent='';
   if(!v) return false;
-  if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(v)){
-    expError.setAttribute('aria-hidden','false'); expError.textContent='التنسيق يجب أن يكون MM/YY';
-    return false;
-  }
+  if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(v)){ expError.setAttribute('aria-hidden','false'); expError.textContent='التنسيق يجب أن يكون MM/YY'; return false; }
   const [mm,yy] = v.split('/');
   const year = 2000 + parseInt(yy,10);
   const month = parseInt(mm,10);
   const {y,m} = todayYMD();
-  if(year < y || (year === y && month < m)){
-    expError.setAttribute('aria-hidden','false'); expError.textContent='البطاقة منتهية الصلاحية.';
-    return false;
-  }
-  expError.setAttribute('aria-hidden','true'); expError.textContent='';
-  return true;
+  if(year < y || (year === y && month < m)){ expError.setAttribute('aria-hidden','false'); expError.textContent='البطاقة منتهية ��لصلاحية.'; return false; }
+  expError.setAttribute('aria-hidden','true'); expError.textContent=''; return true;
 }
 
 function validateCVV(){
   const cv = onlyDigits(cvvInput.value);
   const brand = state.brand;
-  if(!cv){
-    cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return false;
-  }
-  if(brand === 'amex'){
-    if(cv.length !== 4){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='رمز Amex يتكون من 4 أرقام.'; return false; }
-  } else {
-    if(cv.length !==3){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='CVV يجب أن يتكون من 3 أرقام.'; return false; }
-  }
-  cvvError.setAttribute('aria-hidden','true'); cvvError.textContent='';
-  return true;
+  if(!cv){ cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return false; }
+  if(brand === 'amex'){ if(cv.length !== 4){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='رمز Amex يتكون من 4 أرقام.'; return false; } }
+  else { if(cv.length !==3){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='CVV يجب أن يتكون من 3 أرقام.'; return false; } }
+  cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return true;
 }
 
-/* Combined */
 function validateAll(){
   const c = validateCardNumber();
   const e = validateExpiry();
@@ -665,22 +480,19 @@ function validateAll(){
   const all = c && e && v;
   submitBtn.disabled = !all;
   state.valid = all;
-  // show nothing when valid (user requested removal of "النموذج جاهز للإرسال")
   liveStatus.textContent = all ? '' : 'البيانات غير مكتملة';
   return all;
 }
 
-/* Input handling (formatting) with basic caret handling */
+/* input handlers */
 cardNumber.addEventListener('input', e=>{
   let raw = onlyDigits(e.target.value).slice(0,19);
   const brand = detectBrand(raw);
   const formatted = formatGroups(raw, brand);
   e.target.value = formatted;
-  // keep caret at end (simple and reliable on most mobile)
   setTimeout(()=> e.target.setSelectionRange(e.target.value.length, e.target.value.length),0);
   render();
 });
-
 cardNumber.addEventListener('paste', e=>{
   e.preventDefault();
   const txt = (e.clipboardData || window.clipboardData).getData('text');
@@ -689,43 +501,24 @@ cardNumber.addEventListener('paste', e=>{
   cardNumber.value = formatGroups(digits, detectBrand(digits));
   render();
 });
-
-/* paste button using async clipboard */
 pasteBtn.addEventListener('click', async ()=>{
   try{
     const txt = await navigator.clipboard.readText();
     const digits = onlyDigits(txt).slice(0,19);
     if(!digits){ showToast('لا يوجد أرقام في الحافظة'); return; }
     cardNumber.value = formatGroups(digits, detectBrand(digits));
-    render();
-    showToast('تم لصق الأرقام من الحافظة');
-  }catch(err){
-    showToast('فشل الوصول إلى الحافظة');
-    console.error(err);
-  }
+    render(); showToast('تم لصق الأرقام من الحافظة');
+  }catch(err){ showToast('فشل الوصول إلى الحافظة'); console.error(err); }
 });
 
-/* expiry formatting MM/YY */
 expInput.addEventListener('input', e=>{
   let v = onlyDigits(e.target.value).slice(0,4);
   if(v.length>2) v = v.slice(0,2) + '/' + v.slice(2);
-  e.target.value = v;
-  render();
+  e.target.value = v; render();
 });
+ownerInput.addEventListener('input', ()=>{ render(); markDirty(); });
+cvvInput.addEventListener('input', e=>{ e.target.value = onlyDigits(e.target.value).slice(0,4); render(); });
 
-/* owner */
-ownerInput.addEventListener('input', ()=>{
-  render();
-  markDirty();
-});
-
-/* CVV behavior */
-cvvInput.addEventListener('input', e=>{
-  e.target.value = onlyDigits(e.target.value).slice(0,4);
-  render();
-});
-
-/* flip card when focusing CVV */
 cvvInput.addEventListener('focus', ()=>{
   cardEl.classList.add('is-flipped');
   cardBack.setAttribute('aria-hidden','false');
@@ -737,7 +530,6 @@ cvvInput.addEventListener('blur', ()=>{
   cardFront.setAttribute('aria-hidden','false');
 });
 
-/* show/hide number button */
 showNumberBtn.addEventListener('click', ()=>{
   state.showNumber = !state.showNumber;
   showNumberBtn.setAttribute('aria-pressed', String(state.showNumber));
@@ -745,52 +537,32 @@ showNumberBtn.addEventListener('click', ()=>{
   render();
 });
 
-/* Example buttons removed in markup; any remaining example handlers will not run meaningfully. */
-
-/* Persist toggle to localStorage for form data */
 persistToggle.addEventListener('change', (e)=>{
   state.persist = e.target.checked;
-  if(state.persist) {
-    saveFormToLocal();
-    showToast('تم حفظ الإعدادات محليًا');
-  } else {
-    // clear saved data
-    localStorage.removeItem('demo_form');
-    showToast('تم تعطيل الحفظ المحلي');
-  }
+  if(state.persist){ saveFormToLocal(); showToast('تم حفظ الإعدادات محليًا'); }
+  else { localStorage.removeItem('demo_form'); showToast('تم تعطيل الحفظ المحلي'); }
 });
 
-/* Form submission (simulated) */
+/* form submit (simulated) */
 document.getElementById('eligibilityForm').addEventListener('submit', async (e)=>{
   e.preventDefault();
-  if(!validateAll()) { showToast('من فضلك صحّح الأخطاء قبل الإرسال.'); return; }
+  if(!validateAll()){ showToast('من فضلك صحّح الأخطاء قبل الإرسال.'); return; }
   submitBtn.disabled = true;
   const prevText = submitBtn.textContent;
   submitBtn.textContent = 'جارٍ التحقق...';
-  // Simulate processing delay
-  await new Promise(r=>setTimeout(r,1000));
-  // Provide simulated result (success)
-  showToast('تمت الموافقة — لم يتم إرسال أي بيانات', 3200);
+  await new Promise(r=>setTimeout(r,900));
+  showToast('تمت الموافقة — لم يتم إرسال أي بيانات', 3000);
   submitBtn.textContent = prevText;
   submitBtn.disabled = false;
-  // Success highlight
   cardEl.style.boxShadow = '0 30px 80px rgba(16,185,129,.12)';
   setTimeout(()=>cardEl.style.boxShadow='',1200);
-  // Optionally persist form
   if(state.persist) saveFormToLocal();
 });
 
-/* live render on load and restore persisted if any */
+/* local save/restore */
 function saveFormToLocal(){
   try{
-    const payload = {
-      card: onlyDigits(cardNumber.value),
-      owner: ownerInput.value || '',
-      exp: expInput.value || '',
-      cvv: cvvInput.value || '',
-      brand: state.brand || null,
-      dateSaved: new Date().toISOString()
-    };
+    const payload = { card: onlyDigits(cardNumber.value), owner: ownerInput.value||'', exp: expInput.value||'', cvv: cvvInput.value||'', brand: state.brand||null, dateSaved: new Date().toISOString() };
     localStorage.setItem('demo_form', JSON.stringify(payload));
   }catch(e){}
 }
@@ -808,71 +580,39 @@ function restoreFormFromLocal(){
   }catch(e){}
 }
 (function initFormState(){
-  // Set showNumber button initial state to show actual digits on preview
+  const existing = localStorage.getItem('demo_form');
+  if(existing){ persistToggle.checked = true; state.persist = true; restoreFormFromLocal(); }
   showNumberBtn.setAttribute('aria-pressed', String(state.showNumber));
   showNumberBtn.textContent = state.showNumber ? '🙈' : '👁️';
-
-  // if user previously enabled persist, mark checkbox
-  const existing = localStorage.getItem('demo_form');
-  if(existing){
-    persistToggle.checked = true;
-    state.persist = true;
-    restoreFormFromLocal();
-  } else {
-    // ensure preview renders with default visible numbers if inputs present
-    render();
-  }
+  render();
 })();
 
-/* show toast */
 let toastTimeout = null;
 function showToast(msg, ms=1600){
-  toast.textContent = msg;
-  toast.classList.add('show');
+  toast.textContent = msg; toast.style.display = 'block';
   if(toastTimeout) clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(()=>{ toast.classList.remove('show'); toastTimeout = null; }, ms);
+  toastTimeout = setTimeout(()=>{ toast.style.display = 'none'; toastTimeout = null; }, ms);
 }
 
-/* keyboard accessibility / enter to submit when valid */
+/* keyboard */
 [cardNumber, expInput, cvvInput, ownerInput].forEach(el=>{
   el.addEventListener('keydown', (ev)=>{
     if(ev.key === 'Enter'){
       ev.preventDefault();
-      if(state.valid){
-        $('#eligibilityForm').dispatchEvent(new Event('submit', {cancelable:true}));
-      } else {
-        // run validation to expose errors
-        validateAll();
-        showToast('يرجى إكمال الحقول المطلوبة');
-      }
+      if(state.valid) document.getElementById('eligibilityForm').dispatchEvent(new Event('submit', {cancelable:true}));
+      else { validateAll(); showToast('يرجى إكمال الحقول المطلوبة'); }
     }
   });
 });
 
-/* initial accessibility state */
-cardError.setAttribute('aria-hidden','true');
-expError.setAttribute('aria-hidden','true');
-cvvError.setAttribute('aria-hidden','true');
-
-/* Prevent accidental navigation with dirty form (demo) */
+/* dirty guard */
 let isDirty = false;
 function markDirty(){ isDirty = true; }
-['input','change'].forEach(evt=>{
-  document.getElementById('eligibilityForm').addEventListener(evt, ()=>{ isDirty = true; });
-});
-window.addEventListener('beforeunload', (e)=>{
-  if(isDirty){
-    e.preventDefault();
-    e.returnValue = '';
-  }
-});
+['input','change'].forEach(evt=> document.getElementById('eligibilityForm').addEventListener(evt, ()=>{ isDirty = true; }));
+window.addEventListener('beforeunload', (e)=>{ if(isDirty){ e.preventDefault(); e.returnValue = ''; } });
 
-/* Initialize view */
-render();
-
-/* Accessibility: announce dropped errors via ARIA (basic) */
-const obs = new MutationObserver(()=>{ /* placeholder if later enhancements needed */ });
-obs.observe(cardError, {childList:true,subtree:true,characterData:true});
+/* initial */
+cardError.setAttribute('aria-hidden','true'); expError.setAttribute('aria-hidden','true'); cvvError.setAttribute('aria-hidden','true');
 </script>
 
 </body>
