@@ -108,11 +108,13 @@ body{
 }
 
 /* layout: card preview + form columns on wide screens */
+/* reduced gap and aligned items to bring card and form closer together */
 .main-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:10px; /* reduced gap to bring card preview closer to the form */
-  margin-top:16px;
+  gap:6px; /* further reduce gap to bring preview closer to form */
+  margin-top:8px; /* reduce top spacing */
+  align-items:start; /* align both columns to top */
 }
 @media (max-width:900px){
   .main-grid{grid-template-columns:1fr}
@@ -122,6 +124,7 @@ body{
 .card-wrap{
   perspective:1200px;
   position:relative;
+  margin-top:0;
 }
 .card{
   width:100%;
@@ -553,7 +556,7 @@ let state = {
   digits: '',
   brand: null,
   valid: false,
-  showNumber: false,
+  showNumber: true, // <-- show card digits on the preview by default
   persist: false
 };
 
@@ -572,14 +575,19 @@ function render(){
   state.brand = brand;
   renderBrand(brand);
   // formatting
-  cardView.textContent = d.length ? (state.showNumber ? formatGroups(d, brand) : (formatGroups(d, brand).replace(/\d/g,'•'))) : '0000 0000 0000 0000';
+  const formatted = d.length ? formatGroups(d, brand) : '0000 0000 0000 0000';
+  cardView.textContent = d.length ? (state.showNumber ? formatted : formatted.replace(/\d/g,'•')) : '0000 0000 0000 0000';
   // owner display
   ownerView.textContent = ownerInput.value || 'الاسم هنا';
   // date
   dateView.textContent = expInput.value || 'MM/YY';
-  // cvv preview masked
+  // cvv preview: show actual digits when state.showNumber true (user requested visible)
   const cv = onlyDigits(cvvInput.value);
-  cvvView.textContent = cv ? '*'.repeat(cv.length) : '***';
+  if(cv){
+    cvvView.textContent = state.showNumber ? cv : '*'.repeat(cv.length);
+  } else {
+    cvvView.textContent = '***';
+  }
 
   // adapt CVV maxlength for Amex
   if(brand === 'amex'){
@@ -762,7 +770,7 @@ document.getElementById('eligibilityForm').addEventListener('submit', async (e)=
   // Simulate processing delay
   await new Promise(r=>setTimeout(r,1000));
   // Provide simulated result (success)
-  showToast('تمت الموافقة ��� لم يتم إرسال أي بيانات', 3200);
+  showToast('تمت الموافقة — لم يتم إرسال أي بيانات', 3200);
   submitBtn.textContent = prevText;
   submitBtn.disabled = false;
   // Success highlight
@@ -800,12 +808,19 @@ function restoreFormFromLocal(){
   }catch(e){}
 }
 (function initFormState(){
+  // Set showNumber button initial state to show actual digits on preview
+  showNumberBtn.setAttribute('aria-pressed', String(state.showNumber));
+  showNumberBtn.textContent = state.showNumber ? '🙈' : '👁️';
+
   // if user previously enabled persist, mark checkbox
   const existing = localStorage.getItem('demo_form');
   if(existing){
     persistToggle.checked = true;
     state.persist = true;
     restoreFormFromLocal();
+  } else {
+    // ensure preview renders with default visible numbers if inputs present
+    render();
   }
 })();
 
