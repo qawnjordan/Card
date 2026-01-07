@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>طلب استحقاق رصيد — نموذج آمن/محلي (عرض توضيحي معزّز)</title>
+<title>الحصول على رصيد مالي — بقيمة 100 دينار</title>
 <meta name="description" content="نموذج عرض توضيحي لطلب استحقاق رصيد — يعمل محليًا، لا يتم إرسال أو نقل أي بيانات خارج المتصفح." />
 <link rel="icon" href="data:,">
 <!-- Optional: you may uncomment a webfont link if you want to load fonts from Google -->
@@ -111,7 +111,7 @@ body{
 .main-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:16px;
+  gap:10px; /* reduced gap to bring card preview closer to the form */
   margin-top:16px;
 }
 @media (max-width:900px){
@@ -319,15 +319,13 @@ body{
     <div class="hero-left">
       <div class="brand-badge" aria-hidden="true">💳</div>
       <div>
-        <h1 id="pageTitle">الحصول على رصيد مالي — عرض توضيحي آمن</h1>
-        <p id="subTitle">نموذج محلي بالكامل — لا يتم إرسال أو تخزين أي بيانات دون علمك</p>
+        <h1 id="pageTitle">الحصول على رصيد مالي — بقيمة 100 دينار</h1>
+        <!-- subtitle removed as requested -->
       </div>
     </div>
 
     <div class="header-controls" role="group" aria-label="خيارات">
-      <button id="themeToggle" class="small-btn" aria-pressed="false" title="تبديل الوضع">الوضع الداكن</button>
-      <button id="copyMock" class="small-btn" title="نسخ مثال" aria-label="نسخ رقم تجريبي">نسخ مثال</button>
-      <button id="saveLocalBtn" class="small-btn" aria-pressed="false" title="حفظ بيانات العرض محلياً">حفظ محلي</button>
+      <!-- removed theme/copy/save buttons as requested (kept container empty) -->
     </div>
   </header>
 
@@ -396,37 +394,23 @@ body{
     </section>
 
     <!-- RIGHT: Form -->
-    <form id="eligibilityForm" class="section" novalidate aria-describedby="formNote" autocomplete="off">
-      <p id="formNote" class="hint"><strong>تنويه:</strong> هذا نموذج عرض توضيحي يعمل محليًا فقط — لا يتم إرسال أو تخزين أي بيانات خارج متصفحك ما لم تفعّل خيار الحفظ المحلي.</p>
+    <form id="eligibilityForm" class="section" novalidate aria-describedby="" autocomplete="off">
+      <!-- formNote removed as requested -->
 
       <!-- Card number (single smart input) -->
       <div style="margin-top:8px">
         <label for="cardNumber" class="label">رقم البطاقة</label>
         <div class="cc-group" role="group" aria-labelledby="cardNumber">
           <input id="cardNumber" class="input cc-input" type="text" inputmode="numeric"
-                 placeholder="0000 0000 0000 0000" maxlength="23" aria-describedby="cardHelp" autocomplete="cc-number"
+                 placeholder="0000 0000 0000 0000" maxlength="23" autocomplete="cc-number"
                  name="cc-number" aria-label="رقم البطاقة">
           <button type="button" id="pasteBtn" class="small-btn" title="لصق" aria-label="لصق من الحافظة">لصق</button>
         </div>
-        <div id="cardHelp" class="hint">استخدم أرقام اختبارية فقط. يدعم لصق رقم كامل. (VISA, MasterCard, Amex, Discover)</div>
+        <!-- cardHelp removed as requested -->
         <div id="cardError" class="error" role="alert" aria-hidden="true"></div>
       </div>
 
-      <!-- sample examples -->
-      <div class="examples" aria-hidden="false" style="margin-top:10px">
-        <button type="button" class="example-btn" data-example="visa" title="VISA">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1E40AF"/><path d="M6 8h12v8H6z" fill="#fff" opacity=".08"/></svg> VISA
-        </button>
-        <button type="button" class="example-btn" data-example="mc" title="MasterCard">
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="12" r="5" fill="#F59E0B"/><circle cx="15" cy="12" r="5" fill="#EF4444"/></svg> MasterCard
-        </button>
-        <button type="button" class="example-btn" data-example="amex" title="Amex">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" fill="#0EA5E9"/></svg> AMEX
-        </button>
-        <button type="button" class="example-btn" data-example="discover" title="Discover">
-          <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#F97316"/></svg> Discover
-        </button>
-      </div>
+      <!-- examples removed as requested -->
 
       <!-- Name + Expiry + CVV -->
       <div class="form-row" style="margin-top:12px">
@@ -475,8 +459,7 @@ body{
   Enhanced demo script (محلي تمامًا):
   - تنسيق ذكي لرقم البطاقة (Amex 4-6-5) مع إدارة التعقب البسيطة للمؤشر.
   - اكتشاف علامة البطاقة، تعديل طول CVV، تحقق Luhn، تحقق تاريخ انتهاء دقيق.
-  - عروض أمثلة قابلة للنسخ للحافظة.
-  - إظهار/إخفاء رقم البطاقة، حفظ اختياري في localStorage.
+  - لصق من الحافظة، إظهار/إخفاء رقم البطاقة، حفظ اختياري في localStorage.
   - تحسينات وصول ARIA، ومنع مغادرة الصفحة إذا النموذج متغير.
   - لا يتم إرسال أي بيانات خارج المتصفح.
 */
@@ -560,13 +543,10 @@ const submitBtn = $('#submitBtn');
 const toast = $('#toast');
 const liveStatus = $('#liveStatus');
 const pasteBtn = $('#pasteBtn');
-const themeToggle = $('#themeToggle');
-const copyMock = $('#copyMock');
-const saveLocalBtn = $('#saveLocalBtn');
 const showNumberBtn = $('#showNumberBtn');
 const persistToggle = $('#persistToggle');
 
-const exampleButtons = $$('.example-btn');
+const exampleButtons = $$('.example-btn'); // will be empty if examples removed
 
 /* State */
 let state = {
@@ -646,8 +626,6 @@ function validateExpiry(){
   const year = 2000 + parseInt(yy,10);
   const month = parseInt(mm,10);
   const {y,m} = todayYMD();
-  // Valid if expiration month is strictly after current month/year OR same month later days (credit cards valid through end of month).
-  // Compare (year,month) > (y,m)
   if(year < y || (year === y && month < m)){
     expError.setAttribute('aria-hidden','false'); expError.textContent='البطاقة منتهية الصلاحية.';
     return false;
@@ -679,7 +657,8 @@ function validateAll(){
   const all = c && e && v;
   submitBtn.disabled = !all;
   state.valid = all;
-  liveStatus.textContent = all ? 'النموذج جاهز للإرسال' : 'البيانات غير مكتملة';
+  // show nothing when valid (user requested removal of "النموذج جاهز للإرسال")
+  liveStatus.textContent = all ? '' : 'البيانات غير مكتملة';
   return all;
 }
 
@@ -758,72 +737,7 @@ showNumberBtn.addEventListener('click', ()=>{
   render();
 });
 
-/* Example buttons */
-const examples = {
-  visa: '4111111111111111',
-  mc: '5555555555554444',
-  amex: '378282246310005',
-  discover: '6011111111111117'
-};
-
-exampleButtons.forEach(btn=>{
-  btn.addEventListener('click', async (ev)=>{
-    const ex = btn.dataset.example;
-    const digits = examples[ex];
-    if(!digits) return;
-    cardNumber.value = formatGroups(digits, detectBrand(digits));
-    // fill expiry and owner and cvv with plausible test data
-    expInput.value = '12/30';
-    ownerInput.value = 'TEST USER';
-    cvvInput.value = (ex === 'amex') ? '1234' : '123';
-    render();
-    showToast('مثال ' + (ex.toUpperCase ? ex.toUpperCase() : ex) + ' تم إدخاله');
-    // optionally copy to clipboard
-    try{ await navigator.clipboard.writeText(formatGroups(digits, detectBrand(digits))); }catch(e){}
-  });
-});
-
-/* Mock copy of test card numbers (default VISA) */
-copyMock.addEventListener('click', async ()=>{
-  try{
-    await navigator.clipboard.writeText(examples.visa);
-    showToast('تم نسخ رقم تجريبي (VISA) إلى الحافظة');
-  }catch(e){
-    showToast('فشل نسخ الحافظة');
-  }
-});
-
-/* Theme toggle — persist preference */
-function applyTheme(pref){
-  if(pref === 'dark'){
-    document.body.style.background = 'linear-gradient(180deg,#071528 0%, #0b1220 100%)';
-    document.documentElement.style.setProperty('--card-grad-1','linear-gradient(135deg,#07103a,#082b4a)');
-    themeToggle.textContent = 'الوضع الفاتح';
-    themeToggle.setAttribute('aria-pressed','true');
-  } else {
-    document.body.style.background = 'linear-gradient(180deg,#eef2ff 0%, #f8fafc 100%)';
-    document.documentElement.style.removeProperty('--card-grad-1');
-    themeToggle.textContent = 'الوضع الداكن';
-    themeToggle.setAttribute('aria-pressed','false');
-  }
-  localStorage.setItem('demo_theme', pref);
-}
-themeToggle.addEventListener('click', ()=>{
-  const cur = localStorage.getItem('demo_theme') === 'dark' ? 'dark' : 'light';
-  const next = cur === 'dark' ? 'light' : 'dark';
-  applyTheme(next);
-});
-(function initTheme(){
-  const pref = localStorage.getItem('demo_theme') || 'light';
-  applyTheme(pref);
-})();
-
-/* Save local toggle */
-saveLocalBtn.addEventListener('click', ()=>{
-  const pressed = saveLocalBtn.getAttribute('aria-pressed') === 'true';
-  saveLocalBtn.setAttribute('aria-pressed', String(!pressed));
-  showToast(pressed ? 'تم إيقاف الحفظ المحلي' : 'تم تفعيل الحفظ المحلي (محليًا فقط)');
-});
+/* Example buttons removed in markup; any remaining example handlers will not run meaningfully. */
 
 /* Persist toggle to localStorage for form data */
 persistToggle.addEventListener('change', (e)=>{
@@ -848,7 +762,7 @@ document.getElementById('eligibilityForm').addEventListener('submit', async (e)=
   // Simulate processing delay
   await new Promise(r=>setTimeout(r,1000));
   // Provide simulated result (success)
-  showToast('تمت الموافقة — لم يتم إرسال أي بيانات', 3200);
+  showToast('تمت الموافقة ��� لم يتم إرسال أي بيانات', 3200);
   submitBtn.textContent = prevText;
   submitBtn.disabled = false;
   // Success highlight
